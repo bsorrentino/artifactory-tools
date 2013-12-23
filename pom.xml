@@ -66,7 +66,6 @@
     </pluginRepository>
   </pluginRepositories>
   <build>
-    <finalName>artifactory-poc</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -113,7 +112,8 @@
     </pluginManagement>
   </build>
   <modules>
-  	<module>artifactory-jersey-cleint</module>
+  	<module>artifactory-jersey-client</module>
   	<module>artifactory-groovy-client</module>
+  	<module>artifactory-forge</module>
   </modules>
 </project>

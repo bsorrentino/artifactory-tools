@@ -4,13 +4,6 @@ import java.util.Arrays;
 
 import javax.inject.Inject;
 
-import org.artifactory.client.Artifactory;
-import org.artifactory.client.ArtifactoryClient;
-import org.artifactory.client.Repositories;
-import org.artifactory.client.model.LightweightRepository;
-import org.artifactory.client.model.Repository;
-import org.artifactory.client.model.RepositoryType;
-import org.artifactory.client.model.impl.RepositoryTypeImpl;
 import org.jboss.forge.resources.Resource;
 import org.jboss.forge.resources.URLResource;
 import org.jboss.forge.shell.Shell;
@@ -33,7 +26,6 @@ public class ArtifactoryForgePlugin implements Plugin
    @Inject
    private Shell shell;
 
-   Artifactory artifactory;
    
    @DefaultCommand
    public void defaultCommand(@PipeIn String in, PipeOut out)
@@ -54,19 +46,6 @@ public class ArtifactoryForgePlugin implements Plugin
 	   if( password==null) {
 		   password = shell.promptSecret("password:");
 	   }
-	   
-	   artifactory = ArtifactoryClient.create(endpoint.getFullyQualifiedName(), username, password);
-	   
-	   final Repositories repos = artifactory.repositories();
-	   
-	   java.util.List<LightweightRepository> repoList = repos.list( RepositoryTypeImpl.LOCAL);
-	   
-	   for( LightweightRepository lr : repoList ) {
-		   
-		   shell.println( lr.toString() );
-	   }
-	   
-	   artifactory.close();
    }
    
    @Command

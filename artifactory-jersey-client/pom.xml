@@ -5,7 +5,7 @@
     <artifactId>artifactory-poc</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
-  <artifactId>artifactory-jersey-cleint</artifactId>
+  <artifactId>artifactory-jersey-client</artifactId>
   
   
 <dependencies>
@@ -35,24 +35,35 @@
         </configuration>
       </plugin>
       
-      <plugin>
-        <groupId>org.jvnet.ws.wadl</groupId>
-        <artifactId>wadl-client-plugin</artifactId>
-        <version>1.1.5</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>generate</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          	<packageName>org.bsc</packageName>
-          	<generationStyle>jaxrs20</generationStyle>
-        </configuration>       
-        
-      </plugin>
     </plugins>
   </build>
 
+<profiles>
+	<profile>
+		<id>wadl</id>
+		<build>
+		<plugins>
+		  <plugin>
+		  <groupId>org.jvnet.ws.wadl</groupId>
+		  <artifactId>wadl-client-plugin</artifactId>
+		  <version>1.1.5</version>
+		  <executions>
+		    <execution>
+		      <goals>
+		        <goal>generate</goal>
+		      </goals>
+		    </execution>
+		  </executions>
+		  <configuration>
+		    	<packageName>org.bsc</packageName>
+		    	<generationStyle>jaxrs20</generationStyle>
+		  </configuration>       	  
+		</plugin>
+		
+		</plugins>
+		</build>
+	</profile>
+	
+	
+</profiles>
 </project>
