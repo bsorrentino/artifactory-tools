@@ -30,10 +30,8 @@ public class ArtifactoryTest {
 								;
 
 		
-		final SupportSoftphoneIt_ArtifactoryApi service = new SupportSoftphoneIt_ArtifactoryApi();
-
 		
-		final Repositories repos = service.repositories(client);
+		final Repositories repos = SupportSoftphoneIt_ArtifactoryApi.repositories(client);
 		
 		{
 		JsonArray result = repos.getAsVndOrgJfrogArtifactoryRepositoriesRepositoryDetailsListJson( "LOCAL", JsonArray.class);
@@ -52,7 +50,7 @@ public class ArtifactoryTest {
 
 		{
 		
-		JsonObject resultObject = service
+		JsonObject resultObject = SupportSoftphoneIt_ArtifactoryApi
 			.search(client)
 			.artifact()
 			.getAsVndOrgJfrogArtifactorySearchArtifactSearchResultJson(
@@ -80,7 +78,7 @@ public class ArtifactoryTest {
 		Calendar c = Calendar.getInstance();
 		
 		c.set(2012, 0, 1);
-		JsonObject resultObject = service
+		JsonObject resultObject = SupportSoftphoneIt_ArtifactoryApi
 			.search(client)
 			.usage()
 			.getAsVndOrgJfrogArtifactorySearchArtifactUsageResultJson(
