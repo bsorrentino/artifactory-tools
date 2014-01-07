@@ -2,7 +2,10 @@ package org.bsc;
 
 import javax.json.JsonArray;
 import javax.json.JsonObject;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.core.Response;
 
+import org.bsc.ArtifactoryApi.WebApplicationExceptionMessage;
 import org.bsc.functional.F2;
 
 public class ArtifactoryUtils {
@@ -62,6 +65,37 @@ public class ArtifactoryUtils {
 		
 		forEachResults(resultsObject.getJsonArray("results"), functor);
 		
+		
+	}
+	
+	/**
+	 * 
+	 * @param client
+	 * @param uri
+	 * @return
+	 */
+	public static void deleteArtifactFromUri( Client client , String uri ) {
+		{
+		final String msg = "client is null!";
+		assert client != null : msg;
+		if( client == null ) {
+			throw new IllegalArgumentException(msg);
+		}}
+		{
+		final String msg = "uri is null!";
+		assert uri != null : msg;
+		if( uri == null ) {
+			throw new IllegalArgumentException(msg);
+		}}
+		
+        final Response response  = 
+        		client.target(uri)
+        		.request("application/vnd.org.jfrog.artifactory.search.ArtifactSearchResult+json")
+        		.build("DELETE").invoke();
+        
+        if (response.getStatus()>= 400) {
+            throw new WebApplicationExceptionMessage(response);
+        }
 		
 	}
 }

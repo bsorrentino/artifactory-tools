@@ -5,28 +5,20 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.Generated;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.Configurable;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 
-import org.glassfish.jersey.uri.UriTemplate;
-
-@Generated(value = {
-    "wadl|file:/Volumes/SSD/Users/softphone/WORKSPACES/INCUBATOR/artifactory-poc/artifactory-jersey-client/src/main/wadl/artifactory.wadl"
-}, comments = "wadl2java, http://wadl.java.net", date = "2013-12-23T20:31:07.463+01:00")
-public class SupportSoftphoneIt_ArtifactoryApi {
+public class ArtifactoryApi {
 
     /**
      * The base URI for the resource represented by this proxy
      * 
-     */
+     
     public final static URI BASE_URI;
 
     static {
@@ -34,7 +26,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
         // Look up to see if we have any indirection in the local copy
         // of META-INF/java-rs-catalog.xml file, assuming it will be in the
         // oasis:name:tc:entity:xmlns:xml:catalog namespace or similar duck type
-        java.io.InputStream is = SupportSoftphoneIt_ArtifactoryApi.class.getResourceAsStream("/META-INF/jax-rs-catalog.xml");
+        java.io.InputStream is = ArtifactoryApi.class.getResourceAsStream("/META-INF/jax-rs-catalog.xml");
         if (is!=null) {
             try {
                 // Ignore the namespace in the catalog, can't use wildcard until
@@ -59,150 +51,47 @@ public class SupportSoftphoneIt_ArtifactoryApi {
         }
         BASE_URI = originalURI;
     }
-
-    public static SupportSoftphoneIt_ArtifactoryApi.Search search(Client client, URI baseURI) {
-        return new SupportSoftphoneIt_ArtifactoryApi.Search(client, baseURI);
+    */
+    
+    public static ArtifactoryApi.Search search(Client client, URI baseURI) {
+        return new ArtifactoryApi.Search(client, baseURI);
     }
 
-    /**
-     * Template method to allow tooling to customize the new Client
-     * 
-     */
-    private static void customizeClientConfiguration(Configurable cc) {
+    public static ArtifactoryApi.Traffic traffic(Client client, URI baseURI) {
+        return new ArtifactoryApi.Traffic(client, baseURI);
     }
 
-    /**
-     * Template method to allow tooling to override Client factory
-     * 
-     */
-    private static Client createClientInstance() {
-        return ClientBuilder.newClient();
+    public static ArtifactoryApi.System system(Client client, URI baseURI) {
+        return new ArtifactoryApi.System(client, baseURI);
     }
 
-    /**
-     * Create a new Client instance
-     * 
-     */
-    public static Client createClient() {
-        Client client = createClientInstance();
-        customizeClientConfiguration(client);
-        return client;
+    public static ArtifactoryApi.Storage storage(Client client, URI baseURI) {
+        return new ArtifactoryApi.Storage(client, baseURI);
     }
 
-    public static SupportSoftphoneIt_ArtifactoryApi.Search search() {
-        return search(createClient(), BASE_URI);
+    public static ArtifactoryApi.Move move(Client client, URI baseURI) {
+        return new ArtifactoryApi.Move(client, baseURI);
     }
 
-    public static SupportSoftphoneIt_ArtifactoryApi.Search search(Client client) {
-        return search(client, BASE_URI);
+    public static ArtifactoryApi.Download download(Client client, URI baseURI) {
+        return new ArtifactoryApi.Download(client, baseURI);
     }
 
-    public static SupportSoftphoneIt_ArtifactoryApi.Traffic traffic(Client client, URI baseURI) {
-        return new SupportSoftphoneIt_ArtifactoryApi.Traffic(client, baseURI);
+    public static ArtifactoryApi.Repositories repositories(Client client, URI baseURI) {
+        return new ArtifactoryApi.Repositories(client, baseURI);
     }
 
-    public static SupportSoftphoneIt_ArtifactoryApi.Traffic traffic() {
-        return traffic(createClient(), BASE_URI);
+
+    public static ArtifactoryApi.Build build(Client client, URI baseURI) {
+        return new ArtifactoryApi.Build(client, baseURI);
     }
 
-    public static SupportSoftphoneIt_ArtifactoryApi.Traffic traffic(Client client) {
-        return traffic(client, BASE_URI);
+    public static ArtifactoryApi.SystemVersion systemVersion(Client client, URI baseURI) {
+        return new ArtifactoryApi.SystemVersion(client, baseURI);
     }
 
-    public static SupportSoftphoneIt_ArtifactoryApi.System system(Client client, URI baseURI) {
-        return new SupportSoftphoneIt_ArtifactoryApi.System(client, baseURI);
-    }
-
-    public static SupportSoftphoneIt_ArtifactoryApi.System system() {
-        return system(createClient(), BASE_URI);
-    }
-
-    public static SupportSoftphoneIt_ArtifactoryApi.System system(Client client) {
-        return system(client, BASE_URI);
-    }
-
-    public static SupportSoftphoneIt_ArtifactoryApi.Storage storage(Client client, URI baseURI) {
-        return new SupportSoftphoneIt_ArtifactoryApi.Storage(client, baseURI);
-    }
-
-    public static SupportSoftphoneIt_ArtifactoryApi.Storage storage() {
-        return storage(createClient(), BASE_URI);
-    }
-
-    public static SupportSoftphoneIt_ArtifactoryApi.Storage storage(Client client) {
-        return storage(client, BASE_URI);
-    }
-
-    public static SupportSoftphoneIt_ArtifactoryApi.Move move(Client client, URI baseURI) {
-        return new SupportSoftphoneIt_ArtifactoryApi.Move(client, baseURI);
-    }
-
-    public static SupportSoftphoneIt_ArtifactoryApi.Move move() {
-        return move(createClient(), BASE_URI);
-    }
-
-    public static SupportSoftphoneIt_ArtifactoryApi.Move move(Client client) {
-        return move(client, BASE_URI);
-    }
-
-    public static SupportSoftphoneIt_ArtifactoryApi.Download download(Client client, URI baseURI) {
-        return new SupportSoftphoneIt_ArtifactoryApi.Download(client, baseURI);
-    }
-
-    public static SupportSoftphoneIt_ArtifactoryApi.Download download() {
-        return download(createClient(), BASE_URI);
-    }
-
-    public static SupportSoftphoneIt_ArtifactoryApi.Download download(Client client) {
-        return download(client, BASE_URI);
-    }
-
-    public static SupportSoftphoneIt_ArtifactoryApi.Repositories repositories(Client client, URI baseURI) {
-        return new SupportSoftphoneIt_ArtifactoryApi.Repositories(client, baseURI);
-    }
-
-    public static SupportSoftphoneIt_ArtifactoryApi.Repositories repositories() {
-        return repositories(createClient(), BASE_URI);
-    }
-
-    public static SupportSoftphoneIt_ArtifactoryApi.Repositories repositories(Client client) {
-        return repositories(client, BASE_URI);
-    }
-
-    public static SupportSoftphoneIt_ArtifactoryApi.Build build(Client client, URI baseURI) {
-        return new SupportSoftphoneIt_ArtifactoryApi.Build(client, baseURI);
-    }
-
-    public static SupportSoftphoneIt_ArtifactoryApi.Build build() {
-        return build(createClient(), BASE_URI);
-    }
-
-    public static SupportSoftphoneIt_ArtifactoryApi.Build build(Client client) {
-        return build(client, BASE_URI);
-    }
-
-    public static SupportSoftphoneIt_ArtifactoryApi.SystemVersion systemVersion(Client client, URI baseURI) {
-        return new SupportSoftphoneIt_ArtifactoryApi.SystemVersion(client, baseURI);
-    }
-
-    public static SupportSoftphoneIt_ArtifactoryApi.SystemVersion systemVersion() {
-        return systemVersion(createClient(), BASE_URI);
-    }
-
-    public static SupportSoftphoneIt_ArtifactoryApi.SystemVersion systemVersion(Client client) {
-        return systemVersion(client, BASE_URI);
-    }
-
-    public static SupportSoftphoneIt_ArtifactoryApi.Copy copy(Client client, URI baseURI) {
-        return new SupportSoftphoneIt_ArtifactoryApi.Copy(client, baseURI);
-    }
-
-    public static SupportSoftphoneIt_ArtifactoryApi.Copy copy() {
-        return copy(createClient(), BASE_URI);
-    }
-
-    public static SupportSoftphoneIt_ArtifactoryApi.Copy copy(Client client) {
-        return copy(client, BASE_URI);
+    public static ArtifactoryApi.Copy copy(Client client, URI baseURI) {
+        return new ArtifactoryApi.Copy(client, baseURI);
     }
 
     public static class Build {
@@ -210,12 +99,6 @@ public class SupportSoftphoneIt_ArtifactoryApi {
         private Client _client;
         private UriBuilder _uriBuilder;
         private Map<String, Object> _templateAndMatrixParameterValues;
-
-        private Build(Client client, UriBuilder uriBuilder, Map<String, Object> map) {
-            _client = client;
-            _uriBuilder = uriBuilder.clone();
-            _templateAndMatrixParameterValues = map;
-        }
 
         /**
          * Create new instance using existing Client instance, and a base URI and any parameters
@@ -235,7 +118,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             Response response;
             response = resourceBuilder.build("PUT", Entity.entity(input, "application/vnd.org.jfrog.build.BuildInfo+json")).invoke();
             if (response.getStatus()>= 400) {
-                throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
             }
             return response.readEntity(returnType);
         }
@@ -248,7 +131,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             response = resourceBuilder.build("PUT", Entity.entity(input, "application/vnd.org.jfrog.build.BuildInfo+json")).invoke();
             if (!Response.class.isAssignableFrom(returnType)) {
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
             }
             if (!Response.class.isAssignableFrom(returnType)) {
@@ -265,7 +148,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             Response response;
             response = resourceBuilder.build("PUT", Entity.entity(input, "application/vnd.org.jfrog.artifactory+json")).invoke();
             if (response.getStatus()>= 400) {
-                throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
             }
             return response.readEntity(returnType);
         }
@@ -278,7 +161,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             response = resourceBuilder.build("PUT", Entity.entity(input, "application/vnd.org.jfrog.artifactory+json")).invoke();
             if (!Response.class.isAssignableFrom(returnType)) {
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
             }
             if (!Response.class.isAssignableFrom(returnType)) {
@@ -295,7 +178,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             Response response;
             response = resourceBuilder.build("PUT", Entity.entity(input, "application/json")).invoke();
             if (response.getStatus()>= 400) {
-                throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
             }
             return response.readEntity(returnType);
         }
@@ -308,7 +191,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             response = resourceBuilder.build("PUT", Entity.entity(input, "application/json")).invoke();
             if (!Response.class.isAssignableFrom(returnType)) {
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
             }
             if (!Response.class.isAssignableFrom(returnType)) {
@@ -325,7 +208,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             Response response;
             response = resourceBuilder.build("GET").invoke();
             if (response.getStatus()>= 400) {
-                throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
             }
             return response.readEntity(returnType);
         }
@@ -338,7 +221,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             response = resourceBuilder.build("GET").invoke();
             if (!Response.class.isAssignableFrom(returnType)) {
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
             }
             if (!Response.class.isAssignableFrom(returnType)) {
@@ -348,12 +231,12 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             }
         }
 
-        public SupportSoftphoneIt_ArtifactoryApi.Build.Name name(String name) {
-            return new SupportSoftphoneIt_ArtifactoryApi.Build.Name(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues), name);
+        public ArtifactoryApi.Build.Name name(String name) {
+            return new ArtifactoryApi.Build.Name(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues), name);
         }
 
-        public SupportSoftphoneIt_ArtifactoryApi.Build.NameBuildNumber nameBuildNumber(String name, String buildnumber) {
-            return new SupportSoftphoneIt_ArtifactoryApi.Build.NameBuildNumber(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues), name, buildnumber);
+        public ArtifactoryApi.Build.NameBuildNumber nameBuildNumber(String name, String buildnumber) {
+            return new ArtifactoryApi.Build.NameBuildNumber(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues), name, buildnumber);
         }
 
         public static class Name {
@@ -381,26 +264,6 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             }
 
             /**
-             * Create new instance using existing Client instance, and the URI from which the parameters will be extracted
-             * 
-             */
-            public Name(Client client, URI uri) {
-                _client = client;
-                StringBuilder template = new StringBuilder(BASE_URI.toString());
-                if (template.charAt((template.length()- 1))!= '/') {
-                    template.append("/build/{name}");
-                } else {
-                    template.append("build/{name}");
-                }
-                _uriBuilder = UriBuilder.fromPath(template.toString());
-                _templateAndMatrixParameterValues = new HashMap<String, Object>();
-                UriTemplate uriTemplate = new UriTemplate(template.toString());
-                HashMap<String, String> parameters = new HashMap<String, String>();
-                uriTemplate.match(uri.toString(), parameters);
-                _templateAndMatrixParameterValues.putAll(parameters);
-            }
-
-            /**
              * Get name
              * 
              */
@@ -412,12 +275,12 @@ public class SupportSoftphoneIt_ArtifactoryApi {
              * Duplicate state and set name
              * 
              */
-            public SupportSoftphoneIt_ArtifactoryApi.Build.Name setName(String name) {
+            public ArtifactoryApi.Build.Name setName(String name) {
                 Map<String, Object> copyMap;
                 copyMap = new HashMap<String, Object>(_templateAndMatrixParameterValues);
                 UriBuilder copyUriBuilder = _uriBuilder.clone();
                 copyMap.put("name", name);
-                return new SupportSoftphoneIt_ArtifactoryApi.Build.Name(_client, copyUriBuilder, copyMap);
+                return new ArtifactoryApi.Build.Name(_client, copyUriBuilder, copyMap);
             }
 
             public<T >T getAsVndOrgJfrogBuildBuildsByNameJson(GenericType<T> returnType) {
@@ -427,7 +290,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -440,7 +303,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -478,26 +341,6 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             }
 
             /**
-             * Create new instance using existing Client instance, and the URI from which the parameters will be extracted
-             * 
-             */
-            public NameBuildNumber(Client client, URI uri) {
-                _client = client;
-                StringBuilder template = new StringBuilder(BASE_URI.toString());
-                if (template.charAt((template.length()- 1))!= '/') {
-                    template.append("/build/{name}/{buildNumber}");
-                } else {
-                    template.append("build/{name}/{buildNumber}");
-                }
-                _uriBuilder = UriBuilder.fromPath(template.toString());
-                _templateAndMatrixParameterValues = new HashMap<String, Object>();
-                UriTemplate uriTemplate = new UriTemplate(template.toString());
-                HashMap<String, String> parameters = new HashMap<String, String>();
-                uriTemplate.match(uri.toString(), parameters);
-                _templateAndMatrixParameterValues.putAll(parameters);
-            }
-
-            /**
              * Get name
              * 
              */
@@ -509,12 +352,12 @@ public class SupportSoftphoneIt_ArtifactoryApi {
              * Duplicate state and set name
              * 
              */
-            public SupportSoftphoneIt_ArtifactoryApi.Build.NameBuildNumber setName(String name) {
+            public ArtifactoryApi.Build.NameBuildNumber setName(String name) {
                 Map<String, Object> copyMap;
                 copyMap = new HashMap<String, Object>(_templateAndMatrixParameterValues);
                 UriBuilder copyUriBuilder = _uriBuilder.clone();
                 copyMap.put("name", name);
-                return new SupportSoftphoneIt_ArtifactoryApi.Build.NameBuildNumber(_client, copyUriBuilder, copyMap);
+                return new ArtifactoryApi.Build.NameBuildNumber(_client, copyUriBuilder, copyMap);
             }
 
             /**
@@ -529,12 +372,12 @@ public class SupportSoftphoneIt_ArtifactoryApi {
              * Duplicate state and set buildNumber
              * 
              */
-            public SupportSoftphoneIt_ArtifactoryApi.Build.NameBuildNumber setBuildnumber(String buildnumber) {
+            public ArtifactoryApi.Build.NameBuildNumber setBuildnumber(String buildnumber) {
                 Map<String, Object> copyMap;
                 copyMap = new HashMap<String, Object>(_templateAndMatrixParameterValues);
                 UriBuilder copyUriBuilder = _uriBuilder.clone();
                 copyMap.put("buildNumber", buildnumber);
-                return new SupportSoftphoneIt_ArtifactoryApi.Build.NameBuildNumber(_client, copyUriBuilder, copyMap);
+                return new ArtifactoryApi.Build.NameBuildNumber(_client, copyUriBuilder, copyMap);
             }
 
             public<T >T getAsVndOrgJfrogBuildBuildInfoJson(GenericType<T> returnType) {
@@ -544,7 +387,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -557,7 +400,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -577,12 +420,6 @@ public class SupportSoftphoneIt_ArtifactoryApi {
         private UriBuilder _uriBuilder;
         private Map<String, Object> _templateAndMatrixParameterValues;
 
-        private Copy(Client client, UriBuilder uriBuilder, Map<String, Object> map) {
-            _client = client;
-            _uriBuilder = uriBuilder.clone();
-            _templateAndMatrixParameterValues = map;
-        }
-
         /**
          * Create new instance using existing Client instance, and a base URI and any parameters
          * 
@@ -594,8 +431,8 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             _templateAndMatrixParameterValues = new HashMap<String, Object>();
         }
 
-        public SupportSoftphoneIt_ArtifactoryApi.Copy.Path path(String path) {
-            return new SupportSoftphoneIt_ArtifactoryApi.Copy.Path(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues), path);
+        public ArtifactoryApi.Copy.Path path(String path) {
+            return new ArtifactoryApi.Copy.Path(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues), path);
         }
 
         public static class Path {
@@ -622,25 +459,6 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 _templateAndMatrixParameterValues.put("path", path);
             }
 
-            /**
-             * Create new instance using existing Client instance, and the URI from which the parameters will be extracted
-             * 
-             */
-            public Path(Client client, URI uri) {
-                _client = client;
-                StringBuilder template = new StringBuilder(BASE_URI.toString());
-                if (template.charAt((template.length()- 1))!= '/') {
-                    template.append("/copy/{path: .+}");
-                } else {
-                    template.append("copy/{path: .+}");
-                }
-                _uriBuilder = UriBuilder.fromPath(template.toString());
-                _templateAndMatrixParameterValues = new HashMap<String, Object>();
-                UriTemplate uriTemplate = new UriTemplate(template.toString());
-                HashMap<String, String> parameters = new HashMap<String, String>();
-                uriTemplate.match(uri.toString(), parameters);
-                _templateAndMatrixParameterValues.putAll(parameters);
-            }
 
             /**
              * Get path
@@ -654,12 +472,12 @@ public class SupportSoftphoneIt_ArtifactoryApi {
              * Duplicate state and set path
              * 
              */
-            public SupportSoftphoneIt_ArtifactoryApi.Copy.Path setPath(String path) {
+            public ArtifactoryApi.Copy.Path setPath(String path) {
                 Map<String, Object> copyMap;
                 copyMap = new HashMap<String, Object>(_templateAndMatrixParameterValues);
                 UriBuilder copyUriBuilder = _uriBuilder.clone();
                 copyMap.put("path", path);
-                return new SupportSoftphoneIt_ArtifactoryApi.Copy.Path(_client, copyUriBuilder, copyMap);
+                return new ArtifactoryApi.Copy.Path(_client, copyUriBuilder, copyMap);
             }
 
             public<T >T postAsVndOrgJfrogArtifactoryStorageCopyOrMoveResultJson(Object input, GenericType<T> returnType) {
@@ -669,7 +487,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("POST", Entity.entity(input, "*/*")).invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -682,7 +500,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("POST", Entity.entity(input, "*/*")).invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -702,13 +520,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
         private UriBuilder _uriBuilder;
         private Map<String, Object> _templateAndMatrixParameterValues;
 
-        private Download(Client client, UriBuilder uriBuilder, Map<String, Object> map) {
-            _client = client;
-            _uriBuilder = uriBuilder.clone();
-            _templateAndMatrixParameterValues = map;
-        }
-
-        /**
+         /**
          * Create new instance using existing Client instance, and a base URI and any parameters
          * 
          */
@@ -719,8 +531,8 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             _templateAndMatrixParameterValues = new HashMap<String, Object>();
         }
 
-        public SupportSoftphoneIt_ArtifactoryApi.Download.Path path(String path) {
-            return new SupportSoftphoneIt_ArtifactoryApi.Download.Path(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues), path);
+        public ArtifactoryApi.Download.Path path(String path) {
+            return new ArtifactoryApi.Download.Path(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues), path);
         }
 
         public static class Path {
@@ -748,26 +560,6 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             }
 
             /**
-             * Create new instance using existing Client instance, and the URI from which the parameters will be extracted
-             * 
-             */
-            public Path(Client client, URI uri) {
-                _client = client;
-                StringBuilder template = new StringBuilder(BASE_URI.toString());
-                if (template.charAt((template.length()- 1))!= '/') {
-                    template.append("/download/{path: .+}");
-                } else {
-                    template.append("download/{path: .+}");
-                }
-                _uriBuilder = UriBuilder.fromPath(template.toString());
-                _templateAndMatrixParameterValues = new HashMap<String, Object>();
-                UriTemplate uriTemplate = new UriTemplate(template.toString());
-                HashMap<String, String> parameters = new HashMap<String, String>();
-                uriTemplate.match(uri.toString(), parameters);
-                _templateAndMatrixParameterValues.putAll(parameters);
-            }
-
-            /**
              * Get path
              * 
              */
@@ -779,12 +571,12 @@ public class SupportSoftphoneIt_ArtifactoryApi {
              * Duplicate state and set path
              * 
              */
-            public SupportSoftphoneIt_ArtifactoryApi.Download.Path setPath(String path) {
+            public ArtifactoryApi.Download.Path setPath(String path) {
                 Map<String, Object> copyMap;
                 copyMap = new HashMap<String, Object>(_templateAndMatrixParameterValues);
                 UriBuilder copyUriBuilder = _uriBuilder.clone();
                 copyMap.put("path", path);
-                return new SupportSoftphoneIt_ArtifactoryApi.Download.Path(_client, copyUriBuilder, copyMap);
+                return new ArtifactoryApi.Download.Path(_client, copyUriBuilder, copyMap);
             }
 
             public<T >T getAsOctetStream(GenericType<T> returnType) {
@@ -794,7 +586,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -807,7 +599,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -838,7 +630,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -865,7 +657,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -882,7 +674,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -895,7 +687,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -926,7 +718,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -953,7 +745,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -973,12 +765,6 @@ public class SupportSoftphoneIt_ArtifactoryApi {
         private UriBuilder _uriBuilder;
         private Map<String, Object> _templateAndMatrixParameterValues;
 
-        private Move(Client client, UriBuilder uriBuilder, Map<String, Object> map) {
-            _client = client;
-            _uriBuilder = uriBuilder.clone();
-            _templateAndMatrixParameterValues = map;
-        }
-
         /**
          * Create new instance using existing Client instance, and a base URI and any parameters
          * 
@@ -990,8 +776,8 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             _templateAndMatrixParameterValues = new HashMap<String, Object>();
         }
 
-        public SupportSoftphoneIt_ArtifactoryApi.Move.Path path(String path) {
-            return new SupportSoftphoneIt_ArtifactoryApi.Move.Path(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues), path);
+        public ArtifactoryApi.Move.Path path(String path) {
+            return new ArtifactoryApi.Move.Path(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues), path);
         }
 
         public static class Path {
@@ -1019,26 +805,6 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             }
 
             /**
-             * Create new instance using existing Client instance, and the URI from which the parameters will be extracted
-             * 
-             */
-            public Path(Client client, URI uri) {
-                _client = client;
-                StringBuilder template = new StringBuilder(BASE_URI.toString());
-                if (template.charAt((template.length()- 1))!= '/') {
-                    template.append("/move/{path: .+}");
-                } else {
-                    template.append("move/{path: .+}");
-                }
-                _uriBuilder = UriBuilder.fromPath(template.toString());
-                _templateAndMatrixParameterValues = new HashMap<String, Object>();
-                UriTemplate uriTemplate = new UriTemplate(template.toString());
-                HashMap<String, String> parameters = new HashMap<String, String>();
-                uriTemplate.match(uri.toString(), parameters);
-                _templateAndMatrixParameterValues.putAll(parameters);
-            }
-
-            /**
              * Get path
              * 
              */
@@ -1050,12 +816,12 @@ public class SupportSoftphoneIt_ArtifactoryApi {
              * Duplicate state and set path
              * 
              */
-            public SupportSoftphoneIt_ArtifactoryApi.Move.Path setPath(String path) {
+            public ArtifactoryApi.Move.Path setPath(String path) {
                 Map<String, Object> copyMap;
                 copyMap = new HashMap<String, Object>(_templateAndMatrixParameterValues);
                 UriBuilder copyUriBuilder = _uriBuilder.clone();
                 copyMap.put("path", path);
-                return new SupportSoftphoneIt_ArtifactoryApi.Move.Path(_client, copyUriBuilder, copyMap);
+                return new ArtifactoryApi.Move.Path(_client, copyUriBuilder, copyMap);
             }
 
             public<T >T postAsVndOrgJfrogArtifactoryStorageCopyOrMoveResultJson(Object input, GenericType<T> returnType) {
@@ -1065,7 +831,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("POST", Entity.entity(input, "*/*")).invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -1078,7 +844,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("POST", Entity.entity(input, "*/*")).invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -1098,12 +864,6 @@ public class SupportSoftphoneIt_ArtifactoryApi {
         private UriBuilder _uriBuilder;
         private Map<String, Object> _templateAndMatrixParameterValues;
 
-        private Repositories(Client client, UriBuilder uriBuilder, Map<String, Object> map) {
-            _client = client;
-            _uriBuilder = uriBuilder.clone();
-            _templateAndMatrixParameterValues = map;
-        }
-
         /**
          * Create new instance using existing Client instance, and a base URI and any parameters
          * 
@@ -1122,7 +882,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             Response response;
             response = resourceBuilder.build("GET").invoke();
             if (response.getStatus()>= 400) {
-                throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
             }
             return response.readEntity(returnType);
         }
@@ -1135,7 +895,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             response = resourceBuilder.build("GET").invoke();
             if (!Response.class.isAssignableFrom(returnType)) {
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
             }
             if (!Response.class.isAssignableFrom(returnType)) {
@@ -1159,7 +919,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             Response response;
             response = resourceBuilder.build("GET").invoke();
             if (response.getStatus()>= 400) {
-                throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
             }
             return response.readEntity(returnType);
         }
@@ -1179,7 +939,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             response = resourceBuilder.build("GET").invoke();
             if (!Response.class.isAssignableFrom(returnType)) {
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
             }
             if (!Response.class.isAssignableFrom(returnType)) {
@@ -1196,7 +956,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             Response response;
             response = resourceBuilder.build("POST", Entity.entity(input, "application/x-www-form-urlencoded")).invoke();
             if (response.getStatus()>= 400) {
-                throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
             }
             return response.readEntity(returnType);
         }
@@ -1209,7 +969,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             response = resourceBuilder.build("POST", Entity.entity(input, "application/x-www-form-urlencoded")).invoke();
             if (!Response.class.isAssignableFrom(returnType)) {
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
             }
             if (!Response.class.isAssignableFrom(returnType)) {
@@ -1219,8 +979,8 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             }
         }
 
-        public SupportSoftphoneIt_ArtifactoryApi.Repositories.RepoKeyConfiguration repoKeyConfiguration(String repokey) {
-            return new SupportSoftphoneIt_ArtifactoryApi.Repositories.RepoKeyConfiguration(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues), repokey);
+        public ArtifactoryApi.Repositories.RepoKeyConfiguration repoKeyConfiguration(String repokey) {
+            return new ArtifactoryApi.Repositories.RepoKeyConfiguration(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues), repokey);
         }
 
         public static class RepoKeyConfiguration {
@@ -1248,26 +1008,6 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             }
 
             /**
-             * Create new instance using existing Client instance, and the URI from which the parameters will be extracted
-             * 
-             */
-            public RepoKeyConfiguration(Client client, URI uri) {
-                _client = client;
-                StringBuilder template = new StringBuilder(BASE_URI.toString());
-                if (template.charAt((template.length()- 1))!= '/') {
-                    template.append("/repositories/{repoKey}/configuration");
-                } else {
-                    template.append("repositories/{repoKey}/configuration");
-                }
-                _uriBuilder = UriBuilder.fromPath(template.toString());
-                _templateAndMatrixParameterValues = new HashMap<String, Object>();
-                UriTemplate uriTemplate = new UriTemplate(template.toString());
-                HashMap<String, String> parameters = new HashMap<String, String>();
-                uriTemplate.match(uri.toString(), parameters);
-                _templateAndMatrixParameterValues.putAll(parameters);
-            }
-
-            /**
              * Get repoKey
              * 
              */
@@ -1279,12 +1019,12 @@ public class SupportSoftphoneIt_ArtifactoryApi {
              * Duplicate state and set repoKey
              * 
              */
-            public SupportSoftphoneIt_ArtifactoryApi.Repositories.RepoKeyConfiguration setRepokey(String repokey) {
+            public ArtifactoryApi.Repositories.RepoKeyConfiguration setRepokey(String repokey) {
                 Map<String, Object> copyMap;
                 copyMap = new HashMap<String, Object>(_templateAndMatrixParameterValues);
                 UriBuilder copyUriBuilder = _uriBuilder.clone();
                 copyMap.put("repoKey", repokey);
-                return new SupportSoftphoneIt_ArtifactoryApi.Repositories.RepoKeyConfiguration(_client, copyUriBuilder, copyMap);
+                return new ArtifactoryApi.Repositories.RepoKeyConfiguration(_client, copyUriBuilder, copyMap);
             }
 
             public<T >T getAsVndOrgJfrogArtifactoryRepositoriesRepositoryConfigurationJson(GenericType<T> returnType) {
@@ -1294,7 +1034,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -1307,7 +1047,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -1327,12 +1067,6 @@ public class SupportSoftphoneIt_ArtifactoryApi {
         private UriBuilder _uriBuilder;
         private Map<String, Object> _templateAndMatrixParameterValues;
 
-        private Search(Client client, UriBuilder uriBuilder, Map<String, Object> map) {
-            _client = client;
-            _uriBuilder = uriBuilder.clone();
-            _templateAndMatrixParameterValues = map;
-        }
-
         /**
          * Create new instance using existing Client instance, and a base URI and any parameters
          * 
@@ -1344,32 +1078,32 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             _templateAndMatrixParameterValues = new HashMap<String, Object>();
         }
 
-        public SupportSoftphoneIt_ArtifactoryApi.Search.Artifact artifact() {
-            return new SupportSoftphoneIt_ArtifactoryApi.Search.Artifact(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
+        public ArtifactoryApi.Search.Artifact artifact() {
+            return new ArtifactoryApi.Search.Artifact(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
         }
 
-        public SupportSoftphoneIt_ArtifactoryApi.Search.Archive archive() {
-            return new SupportSoftphoneIt_ArtifactoryApi.Search.Archive(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
+        public ArtifactoryApi.Search.Archive archive() {
+            return new ArtifactoryApi.Search.Archive(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
         }
 
-        public SupportSoftphoneIt_ArtifactoryApi.Search.Gavc gavc() {
-            return new SupportSoftphoneIt_ArtifactoryApi.Search.Gavc(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
+        public ArtifactoryApi.Search.Gavc gavc() {
+            return new ArtifactoryApi.Search.Gavc(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
         }
 
-        public SupportSoftphoneIt_ArtifactoryApi.Search.Prop prop() {
-            return new SupportSoftphoneIt_ArtifactoryApi.Search.Prop(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
+        public ArtifactoryApi.Search.Prop prop() {
+            return new ArtifactoryApi.Search.Prop(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
         }
 
-        public SupportSoftphoneIt_ArtifactoryApi.Search.Xpath xpath() {
-            return new SupportSoftphoneIt_ArtifactoryApi.Search.Xpath(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
+        public ArtifactoryApi.Search.Xpath xpath() {
+            return new ArtifactoryApi.Search.Xpath(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
         }
 
-        public SupportSoftphoneIt_ArtifactoryApi.Search.Usage usage() {
-            return new SupportSoftphoneIt_ArtifactoryApi.Search.Usage(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
+        public ArtifactoryApi.Search.Usage usage() {
+            return new ArtifactoryApi.Search.Usage(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
         }
 
-        public SupportSoftphoneIt_ArtifactoryApi.Search.Creation creation() {
-            return new SupportSoftphoneIt_ArtifactoryApi.Search.Creation(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
+        public ArtifactoryApi.Search.Creation creation() {
+            return new ArtifactoryApi.Search.Creation(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
         }
 
         public static class Archive {
@@ -1377,12 +1111,6 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             private Client _client;
             private UriBuilder _uriBuilder;
             private Map<String, Object> _templateAndMatrixParameterValues;
-
-            private Archive(Client client, UriBuilder uriBuilder, Map<String, Object> map) {
-                _client = client;
-                _uriBuilder = uriBuilder.clone();
-                _templateAndMatrixParameterValues = map;
-            }
 
             /**
              * Create new instance using existing Client instance, and a base URI and any parameters
@@ -1402,7 +1130,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -1415,7 +1143,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -1446,7 +1174,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -1473,7 +1201,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -1490,12 +1218,6 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             private Client _client;
             private UriBuilder _uriBuilder;
             private Map<String, Object> _templateAndMatrixParameterValues;
-
-            private Artifact(Client client, UriBuilder uriBuilder, Map<String, Object> map) {
-                _client = client;
-                _uriBuilder = uriBuilder.clone();
-                _templateAndMatrixParameterValues = map;
-            }
 
             /**
              * Create new instance using existing Client instance, and a base URI and any parameters
@@ -1515,7 +1237,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -1528,7 +1250,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -1559,7 +1281,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -1586,7 +1308,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -1603,12 +1325,6 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             private Client _client;
             private UriBuilder _uriBuilder;
             private Map<String, Object> _templateAndMatrixParameterValues;
-
-            private Creation(Client client, UriBuilder uriBuilder, Map<String, Object> map) {
-                _client = client;
-                _uriBuilder = uriBuilder.clone();
-                _templateAndMatrixParameterValues = map;
-            }
 
             /**
              * Create new instance using existing Client instance, and a base URI and any parameters
@@ -1628,7 +1344,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -1641,7 +1357,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -1672,7 +1388,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -1699,7 +1415,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -1716,12 +1432,6 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             private Client _client;
             private UriBuilder _uriBuilder;
             private Map<String, Object> _templateAndMatrixParameterValues;
-
-            private Gavc(Client client, UriBuilder uriBuilder, Map<String, Object> map) {
-                _client = client;
-                _uriBuilder = uriBuilder.clone();
-                _templateAndMatrixParameterValues = map;
-            }
 
             /**
              * Create new instance using existing Client instance, and a base URI and any parameters
@@ -1741,7 +1451,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -1754,7 +1464,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -1806,7 +1516,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -1854,7 +1564,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -1871,12 +1581,6 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             private Client _client;
             private UriBuilder _uriBuilder;
             private Map<String, Object> _templateAndMatrixParameterValues;
-
-            private Prop(Client client, UriBuilder uriBuilder, Map<String, Object> map) {
-                _client = client;
-                _uriBuilder = uriBuilder.clone();
-                _templateAndMatrixParameterValues = map;
-            }
 
             /**
              * Create new instance using existing Client instance, and a base URI and any parameters
@@ -1896,7 +1600,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -1909,7 +1613,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -1933,7 +1637,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -1953,7 +1657,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -1970,12 +1674,6 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             private Client _client;
             private UriBuilder _uriBuilder;
             private Map<String, Object> _templateAndMatrixParameterValues;
-
-            private Usage(Client client, UriBuilder uriBuilder, Map<String, Object> map) {
-                _client = client;
-                _uriBuilder = uriBuilder.clone();
-                _templateAndMatrixParameterValues = map;
-            }
 
             /**
              * Create new instance using existing Client instance, and a base URI and any parameters
@@ -1995,7 +1693,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -2008,7 +1706,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -2039,7 +1737,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -2066,7 +1764,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -2083,12 +1781,6 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             private Client _client;
             private UriBuilder _uriBuilder;
             private Map<String, Object> _templateAndMatrixParameterValues;
-
-            private Xpath(Client client, UriBuilder uriBuilder, Map<String, Object> map) {
-                _client = client;
-                _uriBuilder = uriBuilder.clone();
-                _templateAndMatrixParameterValues = map;
-            }
 
             /**
              * Create new instance using existing Client instance, and a base URI and any parameters
@@ -2108,7 +1800,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -2121,7 +1813,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -2173,7 +1865,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -2221,7 +1913,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -2241,12 +1933,6 @@ public class SupportSoftphoneIt_ArtifactoryApi {
         private UriBuilder _uriBuilder;
         private Map<String, Object> _templateAndMatrixParameterValues;
 
-        private Storage(Client client, UriBuilder uriBuilder, Map<String, Object> map) {
-            _client = client;
-            _uriBuilder = uriBuilder.clone();
-            _templateAndMatrixParameterValues = map;
-        }
-
         /**
          * Create new instance using existing Client instance, and a base URI and any parameters
          * 
@@ -2258,8 +1944,8 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             _templateAndMatrixParameterValues = new HashMap<String, Object>();
         }
 
-        public SupportSoftphoneIt_ArtifactoryApi.Storage.Path path(String path) {
-            return new SupportSoftphoneIt_ArtifactoryApi.Storage.Path(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues), path);
+        public ArtifactoryApi.Storage.Path path(String path) {
+            return new ArtifactoryApi.Storage.Path(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues), path);
         }
 
         public static class Path {
@@ -2287,26 +1973,6 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             }
 
             /**
-             * Create new instance using existing Client instance, and the URI from which the parameters will be extracted
-             * 
-             */
-            public Path(Client client, URI uri) {
-                _client = client;
-                StringBuilder template = new StringBuilder(BASE_URI.toString());
-                if (template.charAt((template.length()- 1))!= '/') {
-                    template.append("/storage/{path: .+}");
-                } else {
-                    template.append("storage/{path: .+}");
-                }
-                _uriBuilder = UriBuilder.fromPath(template.toString());
-                _templateAndMatrixParameterValues = new HashMap<String, Object>();
-                UriTemplate uriTemplate = new UriTemplate(template.toString());
-                HashMap<String, String> parameters = new HashMap<String, String>();
-                uriTemplate.match(uri.toString(), parameters);
-                _templateAndMatrixParameterValues.putAll(parameters);
-            }
-
-            /**
              * Get path
              * 
              */
@@ -2318,12 +1984,12 @@ public class SupportSoftphoneIt_ArtifactoryApi {
              * Duplicate state and set path
              * 
              */
-            public SupportSoftphoneIt_ArtifactoryApi.Storage.Path setPath(String path) {
+            public ArtifactoryApi.Storage.Path setPath(String path) {
                 Map<String, Object> copyMap;
                 copyMap = new HashMap<String, Object>(_templateAndMatrixParameterValues);
                 UriBuilder copyUriBuilder = _uriBuilder.clone();
                 copyMap.put("path", path);
-                return new SupportSoftphoneIt_ArtifactoryApi.Storage.Path(_client, copyUriBuilder, copyMap);
+                return new ArtifactoryApi.Storage.Path(_client, copyUriBuilder, copyMap);
             }
 
             public<T >T getAsVndOrgJfrogArtifactoryStorageFolderInfoJson(GenericType<T> returnType) {
@@ -2333,7 +1999,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -2346,7 +2012,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -2384,7 +2050,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -2418,7 +2084,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -2435,7 +2101,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -2448,7 +2114,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -2486,7 +2152,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -2520,7 +2186,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -2537,7 +2203,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -2550,7 +2216,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -2588,7 +2254,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -2622,7 +2288,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -2639,7 +2305,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -2652,7 +2318,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -2690,7 +2356,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -2724,7 +2390,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -2741,7 +2407,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -2754,7 +2420,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -2792,7 +2458,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -2826,7 +2492,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -2846,12 +2512,6 @@ public class SupportSoftphoneIt_ArtifactoryApi {
         private UriBuilder _uriBuilder;
         private Map<String, Object> _templateAndMatrixParameterValues;
 
-        private System(Client client, UriBuilder uriBuilder, Map<String, Object> map) {
-            _client = client;
-            _uriBuilder = uriBuilder.clone();
-            _templateAndMatrixParameterValues = map;
-        }
-
         /**
          * Create new instance using existing Client instance, and a base URI and any parameters
          * 
@@ -2870,7 +2530,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             Response response;
             response = resourceBuilder.build("GET").invoke();
             if (response.getStatus()>= 400) {
-                throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
             }
             return response.readEntity(returnType);
         }
@@ -2883,7 +2543,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             response = resourceBuilder.build("GET").invoke();
             if (!Response.class.isAssignableFrom(returnType)) {
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
             }
             if (!Response.class.isAssignableFrom(returnType)) {
@@ -2893,24 +2553,24 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             }
         }
 
-        public SupportSoftphoneIt_ArtifactoryApi.System.Import importData() {
-            return new SupportSoftphoneIt_ArtifactoryApi.System.Import(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
+        public ArtifactoryApi.System.Import importData() {
+            return new ArtifactoryApi.System.Import(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
         }
 
-        public SupportSoftphoneIt_ArtifactoryApi.System.Export export() {
-            return new SupportSoftphoneIt_ArtifactoryApi.System.Export(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
+        public ArtifactoryApi.System.Export export() {
+            return new ArtifactoryApi.System.Export(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
         }
 
-        public SupportSoftphoneIt_ArtifactoryApi.System.Configuration configuration() {
-            return new SupportSoftphoneIt_ArtifactoryApi.System.Configuration(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
+        public ArtifactoryApi.System.Configuration configuration() {
+            return new ArtifactoryApi.System.Configuration(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
         }
 
-        public SupportSoftphoneIt_ArtifactoryApi.System.Security security() {
-            return new SupportSoftphoneIt_ArtifactoryApi.System.Security(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
+        public ArtifactoryApi.System.Security security() {
+            return new ArtifactoryApi.System.Security(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
         }
 
-        public SupportSoftphoneIt_ArtifactoryApi.System.Storage storage() {
-            return new SupportSoftphoneIt_ArtifactoryApi.System.Storage(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
+        public ArtifactoryApi.System.Storage storage() {
+            return new ArtifactoryApi.System.Storage(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
         }
 
         public static class Configuration {
@@ -2918,12 +2578,6 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             private Client _client;
             private UriBuilder _uriBuilder;
             private Map<String, Object> _templateAndMatrixParameterValues;
-
-            private Configuration(Client client, UriBuilder uriBuilder, Map<String, Object> map) {
-                _client = client;
-                _uriBuilder = uriBuilder.clone();
-                _templateAndMatrixParameterValues = map;
-            }
 
             /**
              * Create new instance using existing Client instance, and a base URI and any parameters
@@ -2943,7 +2597,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("POST", Entity.entity(input, "application/xml")).invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -2956,7 +2610,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("POST", Entity.entity(input, "application/xml")).invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -2973,7 +2627,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -2986,7 +2640,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -2996,8 +2650,8 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 }
             }
 
-            public SupportSoftphoneIt_ArtifactoryApi.System.Configuration.RemoteRepositories remoteRepositories() {
-                return new SupportSoftphoneIt_ArtifactoryApi.System.Configuration.RemoteRepositories(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
+            public ArtifactoryApi.System.Configuration.RemoteRepositories remoteRepositories() {
+                return new ArtifactoryApi.System.Configuration.RemoteRepositories(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
             }
 
             public static class RemoteRepositories {
@@ -3005,12 +2659,6 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 private Client _client;
                 private UriBuilder _uriBuilder;
                 private Map<String, Object> _templateAndMatrixParameterValues;
-
-                private RemoteRepositories(Client client, UriBuilder uriBuilder, Map<String, Object> map) {
-                    _client = client;
-                    _uriBuilder = uriBuilder.clone();
-                    _templateAndMatrixParameterValues = map;
-                }
 
                 /**
                  * Create new instance using existing Client instance, and a base URI and any parameters
@@ -3030,7 +2678,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                     Response response;
                     response = resourceBuilder.build("PUT", Entity.entity(input, "application/xml")).invoke();
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                     return response.readEntity(returnType);
                 }
@@ -3043,7 +2691,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                     response = resourceBuilder.build("PUT", Entity.entity(input, "application/xml")).invoke();
                     if (!Response.class.isAssignableFrom(returnType)) {
                         if (response.getStatus()>= 400) {
-                            throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                            throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                         }
                     }
                     if (!Response.class.isAssignableFrom(returnType)) {
@@ -3063,12 +2711,6 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             private UriBuilder _uriBuilder;
             private Map<String, Object> _templateAndMatrixParameterValues;
 
-            private Export(Client client, UriBuilder uriBuilder, Map<String, Object> map) {
-                _client = client;
-                _uriBuilder = uriBuilder.clone();
-                _templateAndMatrixParameterValues = map;
-            }
-
             /**
              * Create new instance using existing Client instance, and a base URI and any parameters
              * 
@@ -3087,7 +2729,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -3100,7 +2742,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -3117,7 +2759,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("POST", Entity.entity(input, "application/xml")).invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -3130,7 +2772,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("POST", Entity.entity(input, "application/xml")).invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -3147,12 +2789,6 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             private Client _client;
             private UriBuilder _uriBuilder;
             private Map<String, Object> _templateAndMatrixParameterValues;
-
-            private Import(Client client, UriBuilder uriBuilder, Map<String, Object> map) {
-                _client = client;
-                _uriBuilder = uriBuilder.clone();
-                _templateAndMatrixParameterValues = map;
-            }
 
             /**
              * Create new instance using existing Client instance, and a base URI and any parameters
@@ -3172,7 +2808,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -3185,7 +2821,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -3202,7 +2838,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("POST", Entity.entity(input, "application/xml")).invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -3215,7 +2851,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("POST", Entity.entity(input, "application/xml")).invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -3232,12 +2868,6 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             private Client _client;
             private UriBuilder _uriBuilder;
             private Map<String, Object> _templateAndMatrixParameterValues;
-
-            private Security(Client client, UriBuilder uriBuilder, Map<String, Object> map) {
-                _client = client;
-                _uriBuilder = uriBuilder.clone();
-                _templateAndMatrixParameterValues = map;
-            }
 
             /**
              * Create new instance using existing Client instance, and a base URI and any parameters
@@ -3257,7 +2887,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -3270,7 +2900,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -3287,7 +2917,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("POST", Entity.entity(input, "application/xml")).invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -3300,7 +2930,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("POST", Entity.entity(input, "application/xml")).invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -3310,12 +2940,12 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 }
             }
 
-            public SupportSoftphoneIt_ArtifactoryApi.System.Security.Logout logout() {
-                return new SupportSoftphoneIt_ArtifactoryApi.System.Security.Logout(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
+            public ArtifactoryApi.System.Security.Logout logout() {
+                return new ArtifactoryApi.System.Security.Logout(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
             }
 
-            public SupportSoftphoneIt_ArtifactoryApi.System.Security.PasswordPolicyPolicyName passwordPolicyPolicyName(String policyname) {
-                return new SupportSoftphoneIt_ArtifactoryApi.System.Security.PasswordPolicyPolicyName(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues), policyname);
+            public ArtifactoryApi.System.Security.PasswordPolicyPolicyName passwordPolicyPolicyName(String policyname) {
+                return new ArtifactoryApi.System.Security.PasswordPolicyPolicyName(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues), policyname);
             }
 
             public static class Logout {
@@ -3323,12 +2953,6 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 private Client _client;
                 private UriBuilder _uriBuilder;
                 private Map<String, Object> _templateAndMatrixParameterValues;
-
-                private Logout(Client client, UriBuilder uriBuilder, Map<String, Object> map) {
-                    _client = client;
-                    _uriBuilder = uriBuilder.clone();
-                    _templateAndMatrixParameterValues = map;
-                }
 
                 /**
                  * Create new instance using existing Client instance, and a base URI and any parameters
@@ -3357,7 +2981,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                     Response response;
                     response = resourceBuilder.build("POST").invoke();
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                     return response.readEntity(returnType);
                 }
@@ -3370,7 +2994,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                     response = resourceBuilder.build("POST").invoke();
                     if (!Response.class.isAssignableFrom(returnType)) {
                         if (response.getStatus()>= 400) {
-                            throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                            throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                         }
                     }
                     if (!Response.class.isAssignableFrom(returnType)) {
@@ -3406,26 +3030,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                     _templateAndMatrixParameterValues.put("policyName", policyname);
                 }
 
-                /**
-                 * Create new instance using existing Client instance, and the URI from which the parameters will be extracted
-                 * 
-                 */
-                public PasswordPolicyPolicyName(Client client, URI uri) {
-                    _client = client;
-                    StringBuilder template = new StringBuilder(BASE_URI.toString());
-                    if (template.charAt((template.length()- 1))!= '/') {
-                        template.append("/system/security/passwordPolicy/{policyName}");
-                    } else {
-                        template.append("system/security/passwordPolicy/{policyName}");
-                    }
-                    _uriBuilder = UriBuilder.fromPath(template.toString());
-                    _templateAndMatrixParameterValues = new HashMap<String, Object>();
-                    UriTemplate uriTemplate = new UriTemplate(template.toString());
-                    HashMap<String, String> parameters = new HashMap<String, String>();
-                    uriTemplate.match(uri.toString(), parameters);
-                    _templateAndMatrixParameterValues.putAll(parameters);
-                }
-
+ 
                 /**
                  * Get policyName
                  * 
@@ -3438,12 +3043,12 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                  * Duplicate state and set policyName
                  * 
                  */
-                public SupportSoftphoneIt_ArtifactoryApi.System.Security.PasswordPolicyPolicyName setPolicyname(String policyname) {
+                public ArtifactoryApi.System.Security.PasswordPolicyPolicyName setPolicyname(String policyname) {
                     Map<String, Object> copyMap;
                     copyMap = new HashMap<String, Object>(_templateAndMatrixParameterValues);
                     UriBuilder copyUriBuilder = _uriBuilder.clone();
                     copyMap.put("policyName", policyname);
-                    return new SupportSoftphoneIt_ArtifactoryApi.System.Security.PasswordPolicyPolicyName(_client, copyUriBuilder, copyMap);
+                    return new ArtifactoryApi.System.Security.PasswordPolicyPolicyName(_client, copyUriBuilder, copyMap);
                 }
 
                 public Response post() {
@@ -3462,7 +3067,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                     Response response;
                     response = resourceBuilder.build("POST").invoke();
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                     return response.readEntity(returnType);
                 }
@@ -3475,7 +3080,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                     response = resourceBuilder.build("POST").invoke();
                     if (!Response.class.isAssignableFrom(returnType)) {
                         if (response.getStatus()>= 400) {
-                            throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                            throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                         }
                     }
                     if (!Response.class.isAssignableFrom(returnType)) {
@@ -3495,12 +3100,6 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             private UriBuilder _uriBuilder;
             private Map<String, Object> _templateAndMatrixParameterValues;
 
-            private Storage(Client client, UriBuilder uriBuilder, Map<String, Object> map) {
-                _client = client;
-                _uriBuilder = uriBuilder.clone();
-                _templateAndMatrixParameterValues = map;
-            }
-
             /**
              * Create new instance using existing Client instance, and a base URI and any parameters
              * 
@@ -3512,12 +3111,12 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 _templateAndMatrixParameterValues = new HashMap<String, Object>();
             }
 
-            public SupportSoftphoneIt_ArtifactoryApi.System.Storage.Size size() {
-                return new SupportSoftphoneIt_ArtifactoryApi.System.Storage.Size(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
+            public ArtifactoryApi.System.Storage.Size size() {
+                return new ArtifactoryApi.System.Storage.Size(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
             }
 
-            public SupportSoftphoneIt_ArtifactoryApi.System.Storage.Compress compress() {
-                return new SupportSoftphoneIt_ArtifactoryApi.System.Storage.Compress(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
+            public ArtifactoryApi.System.Storage.Compress compress() {
+                return new ArtifactoryApi.System.Storage.Compress(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
             }
 
             public static class Compress {
@@ -3525,12 +3124,6 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 private Client _client;
                 private UriBuilder _uriBuilder;
                 private Map<String, Object> _templateAndMatrixParameterValues;
-
-                private Compress(Client client, UriBuilder uriBuilder, Map<String, Object> map) {
-                    _client = client;
-                    _uriBuilder = uriBuilder.clone();
-                    _templateAndMatrixParameterValues = map;
-                }
 
                 /**
                  * Create new instance using existing Client instance, and a base URI and any parameters
@@ -3550,7 +3143,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                     Response response;
                     response = resourceBuilder.build("POST").invoke();
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                     return response.readEntity(returnType);
                 }
@@ -3563,7 +3156,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                     response = resourceBuilder.build("POST").invoke();
                     if (!Response.class.isAssignableFrom(returnType)) {
                         if (response.getStatus()>= 400) {
-                            throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                            throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                         }
                     }
                     if (!Response.class.isAssignableFrom(returnType)) {
@@ -3580,12 +3173,6 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 private Client _client;
                 private UriBuilder _uriBuilder;
                 private Map<String, Object> _templateAndMatrixParameterValues;
-
-                private Size(Client client, UriBuilder uriBuilder, Map<String, Object> map) {
-                    _client = client;
-                    _uriBuilder = uriBuilder.clone();
-                    _templateAndMatrixParameterValues = map;
-                }
 
                 /**
                  * Create new instance using existing Client instance, and a base URI and any parameters
@@ -3605,7 +3192,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                     Response response;
                     response = resourceBuilder.build("GET").invoke();
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                     return response.readEntity(returnType);
                 }
@@ -3618,7 +3205,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                     response = resourceBuilder.build("GET").invoke();
                     if (!Response.class.isAssignableFrom(returnType)) {
                         if (response.getStatus()>= 400) {
-                            throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                            throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                         }
                     }
                     if (!Response.class.isAssignableFrom(returnType)) {
@@ -3640,12 +3227,6 @@ public class SupportSoftphoneIt_ArtifactoryApi {
         private UriBuilder _uriBuilder;
         private Map<String, Object> _templateAndMatrixParameterValues;
 
-        private SystemVersion(Client client, UriBuilder uriBuilder, Map<String, Object> map) {
-            _client = client;
-            _uriBuilder = uriBuilder.clone();
-            _templateAndMatrixParameterValues = map;
-        }
-
         /**
          * Create new instance using existing Client instance, and a base URI and any parameters
          * 
@@ -3664,7 +3245,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             Response response;
             response = resourceBuilder.build("GET").invoke();
             if (response.getStatus()>= 400) {
-                throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
             }
             return response.readEntity(returnType);
         }
@@ -3677,7 +3258,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             response = resourceBuilder.build("GET").invoke();
             if (!Response.class.isAssignableFrom(returnType)) {
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
             }
             if (!Response.class.isAssignableFrom(returnType)) {
@@ -3695,12 +3276,6 @@ public class SupportSoftphoneIt_ArtifactoryApi {
         private UriBuilder _uriBuilder;
         private Map<String, Object> _templateAndMatrixParameterValues;
 
-        private Traffic(Client client, UriBuilder uriBuilder, Map<String, Object> map) {
-            _client = client;
-            _uriBuilder = uriBuilder.clone();
-            _templateAndMatrixParameterValues = map;
-        }
-
         /**
          * Create new instance using existing Client instance, and a base URI and any parameters
          * 
@@ -3712,8 +3287,8 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             _templateAndMatrixParameterValues = new HashMap<String, Object>();
         }
 
-        public SupportSoftphoneIt_ArtifactoryApi.Traffic.Stream stream() {
-            return new SupportSoftphoneIt_ArtifactoryApi.Traffic.Stream(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
+        public ArtifactoryApi.Traffic.Stream stream() {
+            return new ArtifactoryApi.Traffic.Stream(_client, _uriBuilder.buildFromMap(_templateAndMatrixParameterValues));
         }
 
         public static class Stream {
@@ -3721,12 +3296,6 @@ public class SupportSoftphoneIt_ArtifactoryApi {
             private Client _client;
             private UriBuilder _uriBuilder;
             private Map<String, Object> _templateAndMatrixParameterValues;
-
-            private Stream(Client client, UriBuilder uriBuilder, Map<String, Object> map) {
-                _client = client;
-                _uriBuilder = uriBuilder.clone();
-                _templateAndMatrixParameterValues = map;
-            }
 
             /**
              * Create new instance using existing Client instance, and a base URI and any parameters
@@ -3746,7 +3315,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -3759,7 +3328,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -3790,7 +3359,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 Response response;
                 response = resourceBuilder.build("GET").invoke();
                 if (response.getStatus()>= 400) {
-                    throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                    throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                 }
                 return response.readEntity(returnType);
             }
@@ -3817,7 +3386,7 @@ public class SupportSoftphoneIt_ArtifactoryApi {
                 response = resourceBuilder.build("GET").invoke();
                 if (!Response.class.isAssignableFrom(returnType)) {
                     if (response.getStatus()>= 400) {
-                        throw new SupportSoftphoneIt_ArtifactoryApi.WebApplicationExceptionMessage(response);
+                        throw new ArtifactoryApi.WebApplicationExceptionMessage(response);
                     }
                 }
                 if (!Response.class.isAssignableFrom(returnType)) {
@@ -3836,12 +3405,13 @@ public class SupportSoftphoneIt_ArtifactoryApi {
      * Workaround for JAX_RS_SPEC-312
      * 
      */
-    private static class WebApplicationExceptionMessage
+    @SuppressWarnings("serial")
+	public static class WebApplicationExceptionMessage
         extends WebApplicationException
     {
 
 
-        private WebApplicationExceptionMessage(Response response) {
+        public WebApplicationExceptionMessage(Response response) {
             super(response);
         }
 
