@@ -9,6 +9,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 
 import org.bsc.SupportSoftphoneIt_ArtifactoryApi.Repositories;
+import org.bsc.functional.F2;
 import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
 import org.glassfish.jersey.jsonp.JsonProcessingFeature;
 
@@ -49,7 +50,6 @@ public class ArtifactoryTest {
 		}}
 
 		{
-		
 		JsonObject resultObject = SupportSoftphoneIt_ArtifactoryApi
 			.search(client)
 			.artifact()
@@ -60,19 +60,19 @@ public class ArtifactoryTest {
 
 		JsonArray result = resultObject.getJsonArray("results");
 		
-		System.out.printf("result.size=%d\n", 
-				result.size());
+		System.out.printf("result.size=%d\n", result.size());
 		
-		for( int i=0; i<result.size(); ++i ) {
+		ArtifactoryUtils.forEachResults(result, new F2<Void,Integer, JsonObject>() {
+
+			@Override
+			public Void f(Integer i, JsonObject p) {
+				System.out.printf("result[%d]\n%s\n", 
+						i, p.toString());
+				return null;
+			}
 			
-			final JsonObject o = result.getJsonObject(i);
-			
-			System.out.printf("result[%d]\n%s\n", 
-					i, o.toString());
-			
-		}}
-		
-		
+		});
+		}
 		{
 		
 		Calendar c = Calendar.getInstance();
@@ -91,14 +91,17 @@ public class ArtifactoryTest {
 		System.out.printf("result.size=%d\n", 
 				result.size());
 		
-		for( int i=0; i<result.size(); ++i ) {
-			
-			final JsonObject o = result.getJsonObject(i);
-			
-			System.out.printf("result[%d]\n%s\n", 
-					i, o.toString());
-			
-		}}
-	}
+		ArtifactoryUtils.forEachResults(result, new F2<Void,Integer, JsonObject>() {
 
+			@Override
+			public Void f(Integer i, JsonObject p) {
+				System.out.printf("result[%d]\n%s\n", 
+						i, p.toString());
+				return null;
+			}
+			
+		});
+		
+		}
+	}
 }

@@ -6,6 +6,11 @@
   <artifactId>artifactory-poc</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
+  <modules>
+    <module>artifactory-jersey-client</module>
+    <module>artifactory-groovy-client</module>
+    <module>artifactory-forge</module>
+  </modules>
   <properties>
     <forge.api.version>1.4.3.Final</forge.api.version>
   </properties>
@@ -46,9 +51,13 @@
         <version>${forge.api.version}</version>
         <scope>test</scope>
       </dependency>
+      <dependency>
+        <groupId>org.aspectj</groupId>
+        <artifactId>aspectjrt</artifactId>
+        <version>1.7.4</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
-
   <repositories>
     <repository>
       <id>JBOSS_NEXUS</id>
@@ -66,6 +75,48 @@
     </pluginRepository>
   </pluginRepositories>
   <build>
+    <pluginManagement>
+      <plugins>
+      
+	   <plugin>
+	      <groupId>org.codehaus.mojo</groupId>
+	      <artifactId>aspectj-maven-plugin</artifactId>
+	      <version>1.5</version>
+	      <configuration>
+	            <complianceLevel>1.6</complianceLevel>
+	            <source>1.6</source>
+	            <target>1.6</target>
+	            <verbose>true</verbose>
+	            <outxml>true</outxml>
+	 	</configuration>
+	 	</plugin>
+ 	      
+        <plugin>
+          <groupId>org.eclipse.m2e</groupId>
+          <artifactId>lifecycle-mapping</artifactId>
+          <version>1.0.0</version>
+          <configuration>
+            <lifecycleMappingMetadata>
+              <pluginExecutions>
+                <pluginExecution>
+                  <pluginExecutionFilter>
+                    <groupId>org.jvnet.ws.wadl</groupId>
+                    <artifactId>wadl-client-plugin</artifactId>
+                    <versionRange>[1.1.5,)</versionRange>
+                    <goals>
+                      <goal>generate</goal>
+                    </goals>
+                  </pluginExecutionFilter>
+                  <action>
+                    <ignore></ignore>
+                  </action>
+                </pluginExecution>
+              </pluginExecutions>
+            </lifecycleMappingMetadata>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -77,43 +128,5 @@
         </configuration>
       </plugin>
     </plugins>
-    <pluginManagement>
-    	<plugins>
-    		<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
-    		<plugin>
-    			<groupId>org.eclipse.m2e</groupId>
-    			<artifactId>lifecycle-mapping</artifactId>
-    			<version>1.0.0</version>
-    			<configuration>
-    				<lifecycleMappingMetadata>
-    					<pluginExecutions>
-    						<pluginExecution>
-    							<pluginExecutionFilter>
-    								<groupId>org.jvnet.ws.wadl</groupId>
-    								<artifactId>
-    									wadl-client-plugin
-    								</artifactId>
-    								<versionRange>
-    									[1.1.5,)
-    								</versionRange>
-    								<goals>
-    									<goal>generate</goal>
-    								</goals>
-    							</pluginExecutionFilter>
-    							<action>
-    								<ignore></ignore>
-    							</action>
-    						</pluginExecution>
-    					</pluginExecutions>
-    				</lifecycleMappingMetadata>
-    			</configuration>
-    		</plugin>
-    	</plugins>
-    </pluginManagement>
   </build>
-  <modules>
-  	<module>artifactory-jersey-client</module>
-  	<module>artifactory-groovy-client</module>
-  	<module>artifactory-forge</module>
-  </modules>
 </project>
