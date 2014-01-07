@@ -3,12 +3,12 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-  	<groupId>org.bsc</groupId>
-  	<artifactId>artifactory-poc</artifactId>
-  	<version>1.0.0-SNAPSHOT</version>
+    <artifactId>artifactory-poc</artifactId>
+    <groupId>org.bsc</groupId>
+    <version>1.0.0-SNAPSHOT</version>
   </parent>
   <artifactId>artifactory-forge</artifactId>
-   <dependencies>
+  <dependencies>
     <dependency>
       <groupId>javax.enterprise</groupId>
       <artifactId>cdi-api</artifactId>
@@ -24,7 +24,6 @@
       <artifactId>forge-shell-api</artifactId>
       <scope>provided</scope>
     </dependency>
-    
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-ext</artifactId>
@@ -36,31 +35,44 @@
       <artifactId>forge-test-harness</artifactId>
       <scope>test</scope>
       <exclusions>
-      	<exclusion>
-      		<groupId>org.slf4j</groupId>
-      		<artifactId>slf4j-log4j12</artifactId>
-      	</exclusion>
-      	<exclusion>
-      		<groupId>org.slf4j</groupId>
-      		<artifactId>slf4j-ext</artifactId>
-      	</exclusion>
+        <exclusion>
+          <artifactId>slf4j-log4j12</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>slf4j-ext</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>jboss-jaxrs-api_1.1_spec</artifactId>
+          <groupId>org.jboss.spec.javax.ws.rs</groupId>
+        </exclusion>
       </exclusions>
     </dependency>
-    
     <dependency>
       <groupId>org.jboss.forge</groupId>
       <artifactId>forge-shell</artifactId>
       <scope>test</scope>
       <exclusions>
-      	<exclusion>
-      		<groupId>org.slf4j</groupId>
-      		<artifactId>slf4j-log4j12</artifactId>
-      	</exclusion>
-      	<exclusion>
-      		<groupId>org.slf4j</groupId>
-      		<artifactId>slf4j-ext</artifactId>
-      	</exclusion>
+        <exclusion>
+          <artifactId>slf4j-log4j12</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>slf4j-ext</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
       </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>artifactory-jersey-client</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish.jersey.core</groupId>
+      <artifactId>jersey-client</artifactId>
+      <version>2.5</version>
     </dependency>
   </dependencies>
   <build>
