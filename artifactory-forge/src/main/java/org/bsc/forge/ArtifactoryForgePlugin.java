@@ -5,14 +5,10 @@ import java.util.Arrays;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import javax.json.JsonObject;
-import javax.json.stream.JsonGenerator;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
 
 import org.bsc.ArtifactoryApi;
-import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
-import org.glassfish.jersey.jsonp.JsonProcessingFeature;
+import org.codehaus.jackson.JsonGenerator;
+import org.codehaus.jettison.json.JSONObject;
 import org.jboss.forge.resources.Resource;
 import org.jboss.forge.resources.URLResource;
 import org.jboss.forge.shell.Shell;
@@ -27,6 +23,10 @@ import org.jboss.forge.shell.plugins.PipeIn;
 import org.jboss.forge.shell.plugins.PipeOut;
 import org.jboss.forge.shell.plugins.Plugin;
 import org.jboss.forge.shell.plugins.SetupCommand;
+
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.filter.ClientFilter;
+import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 
 /**
  *
@@ -59,17 +59,10 @@ public class ArtifactoryForgePlugin implements Plugin
 			
 			this.uri = new java.net.URI(result);
 			
-			final HttpAuthenticationFeature feature = 
-					HttpAuthenticationFeature.basicBuilder()
-				    						.nonPreemptive()
-				    						.credentials(username, password)
-				    						.build();
-			client = ClientBuilder
-					.newClient()
-					.register(feature)
-					.register(JsonProcessingFeature.class)
-					.property(JsonGenerator.PRETTY_PRINTING, true)
-					;
+			final  ClientFilter authFilter = new HTTPBasicAuthFilter(username, password);
+
+			client = ArtifactoryApi.createClient();
+			client.addFilter( authFilter );
 		}
 
 		public final boolean isValid( ) {
@@ -137,13 +130,13 @@ public class ArtifactoryForgePlugin implements Plugin
 
 	   shell.println(ShellColor.RED, _context.toString());
 	   
-	   JsonObject result = ArtifactoryApi.systemVersion(_context.client, _context.uri)
-			   	.getAsVndOrgJfrogArtifactorySystemVersionJson(JsonObject.class);
+	   JSONObject result = ArtifactoryApi.systemVersion(_context.client, _context.uri)
+			   	.getAsVndOrgJfrogArtifactorySystemVersionJson(JSONObject.class);
 	   
 	   shell.println(ShellColor.RED, 
 			   String.format("\nVersion: [%s] - Revision: [%s]\n", 
-					   result.getString("version", "unknown"),
-					   result.getString("revision", "unknown")));
+					   result.getString("version"),
+					   result.getString("revision")));
 /*	   
 	   ArtifactoryUtils.forEachResults(resultsObject, new F2<Void,Integer,JsonObject>() {
 

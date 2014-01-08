@@ -3,19 +3,19 @@ package org.bsc;
 import java.net.URISyntaxException;
 import java.util.Calendar;
 
-import javax.json.JsonArray;
-import javax.json.JsonObject;
-import javax.json.stream.JsonGenerator;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-
 import org.bsc.functional.F2;
-import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
-import org.glassfish.jersey.jsonp.JsonProcessingFeature;
+import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.filter.ClientFilter;
+import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 
 public class ArtifactoryTest {
 
 	static java.net.URI baseUri;
+	static 	Client client;
 	
 	static {
 
@@ -26,22 +26,18 @@ public class ArtifactoryTest {
 			System.exit(-1);
 		}
 
+		 
+		final  ClientFilter authFilter = new HTTPBasicAuthFilter("bsorrentino", "BactiuSP");
+
+		client = ArtifactoryApi.createClient();
+		client.addFilter( authFilter );
+		
 	}
-	static final HttpAuthenticationFeature feature = 
-			HttpAuthenticationFeature.basicBuilder()
-		    						.nonPreemptive()
-		    						.credentials("bsorrentino", "BactiuSP")
-		    						.build();
-	static 	final Client client = ClientBuilder
-			.newClient()
-			.register(feature)
-			.register(JsonProcessingFeature.class)
-			.property(JsonGenerator.PRETTY_PRINTING, true)
-			;
+	
 
 
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		//mainDelete(args);
 		mainSearch(args);
 	}
@@ -49,24 +45,32 @@ public class ArtifactoryTest {
 	/**
 	 * 
 	 * @param args
+	 * @throws JSONException 
 	 */
-	public static void mainDelete(String[] args) {
-		JsonObject resultObject = ArtifactoryApi
+	public static void mainDelete(String[] args) throws JSONException {
+		JSONObject resultObject = ArtifactoryApi
 				.search(client, baseUri)
 				.artifact()
 				.getAsVndOrgJfrogArtifactorySearchArtifactSearchResultJson(
 												"mgwt", 
 												"private-snapshot-repository", 
-												JsonObject.class);
+												JSONObject.class);
 		
-		ArtifactoryUtils.forEachResults(resultObject, new F2<Void,Integer, JsonObject>() {
+		
+		ArtifactoryUtils.forEachResults(resultObject, new F2<Void,Integer, JSONObject>() {
 
 			@Override
-			public Void f(Integer i, JsonObject p) {
-				System.out.printf("url=[%s]\n", p.getString("uri"));
+			public Void f(Integer i, JSONObject p) {
+				try {
+					System.out.printf("url=[%s]\n", p.getString("uri"));
+				
+					ArtifactoryUtils.deleteArtifactFromUri(client, p.getString("uri").replace("/api/storage/", "/"));
+
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
 
 				
-				ArtifactoryUtils.deleteArtifactFromUri(client, p.getString("uri").replace("/api/storage/", "/"));
 				return null;
 			}
 			
@@ -77,8 +81,9 @@ public class ArtifactoryTest {
 	/**
 	 * 
 	 * @param args
+	 * @throws JSONException 
 	 */
-	public static void mainSearch(String[] args) {
+	public static void mainSearch(String[] args) throws JSONException {
 
 		
 		
@@ -100,22 +105,22 @@ public class ArtifactoryTest {
 		}}*/
 
 		{
-		JsonObject resultObject = ArtifactoryApi
+		JSONObject resultObject = ArtifactoryApi
 			.search(client, baseUri)
 			.artifact()
 			.getAsVndOrgJfrogArtifactorySearchArtifactSearchResultJson(
 											"commons-services", 
 											"private-snapshot-repository", 
-											JsonObject.class);
+											JSONObject.class);
 
-		JsonArray result = resultObject.getJsonArray("results");
+		JSONArray result = resultObject.getJSONArray("results");
 		
-		System.out.printf("result.size=%d\n", result.size());
+		System.out.printf("result.size=%d\n", result.length());
 		
-		ArtifactoryUtils.forEachResults(result, new F2<Void,Integer, JsonObject>() {
+		ArtifactoryUtils.forEachResults(result, new F2<Void,Integer, JSONObject>() {
 
 			@Override
-			public Void f(Integer i, JsonObject p) {
+			public Void f(Integer i, JSONObject p) {
 				System.out.printf("result[%d]\n%s\n", 
 						i, p.toString());
 				return null;
@@ -128,23 +133,23 @@ public class ArtifactoryTest {
 		Calendar c = Calendar.getInstance();
 		
 		c.set(2012, 0, 1);
-		JsonObject resultObject = ArtifactoryApi
+		JSONObject resultObject = ArtifactoryApi
 			.search(client, baseUri)
 			.usage()
 			.getAsVndOrgJfrogArtifactorySearchArtifactUsageResultJson(
 					c.getTimeInMillis(), 
 					"private-snapshot-repository", 
-					JsonObject.class)
+					JSONObject.class)
 			;
-		JsonArray result = resultObject.getJsonArray("results");
+		JSONArray result = resultObject.getJSONArray("results");
 		
 		System.out.printf("result.size=%d\n", 
-				result.size());
+				result.length());
 		
-		ArtifactoryUtils.forEachResults(result, new F2<Void,Integer, JsonObject>() {
+		ArtifactoryUtils.forEachResults(result, new F2<Void,Integer, JSONObject>() {
 
 			@Override
-			public Void f(Integer i, JsonObject p) {
+			public Void f(Integer i, JSONObject p) {
 				System.out.printf("result[%d]\n%s\n", 
 						i, p.toString());
 				return null;

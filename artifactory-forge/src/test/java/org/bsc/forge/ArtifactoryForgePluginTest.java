@@ -1,7 +1,6 @@
 package org.bsc.forge;
 
 import org.hamcrest.core.Is;
-import org.hamcrest.core.IsEqual;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.forge.test.AbstractShellTest;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;

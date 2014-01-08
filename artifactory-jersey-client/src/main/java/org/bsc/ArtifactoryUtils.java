@@ -1,12 +1,15 @@
 package org.bsc;
 
-import javax.json.JsonArray;
-import javax.json.JsonObject;
-import javax.ws.rs.client.Client;
 import javax.ws.rs.core.Response;
 
 import org.bsc.ArtifactoryApi.WebApplicationExceptionMessage;
 import org.bsc.functional.F2;
+import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
 
 public class ArtifactoryUtils {
 
@@ -17,8 +20,9 @@ public class ArtifactoryUtils {
 	 * 
 	 * @param resultsObject
 	 * @param functor
+	 * @throws JSONException 
 	 */
-	public static void forEachResults( JsonArray result, F2<Void,Integer,JsonObject> functor ) {
+	public static void forEachResults( JSONArray result, F2<Void,Integer,JSONObject> functor ) throws JSONException {
 		{
 		final String msg = "resultsObject is null!";
 		assert result != null : msg;
@@ -34,9 +38,9 @@ public class ArtifactoryUtils {
 		
 		
 		if( result != null ) {
-			for( int i=0; i<result.size(); ++i ) {
+			for( int i=0; i<result.length(); ++i ) {
 				
-				final JsonObject o = result.getJsonObject(i);
+				final JSONObject o = result.getJSONObject(i);
 				
 				functor.f( i, o );
 			}
@@ -48,8 +52,9 @@ public class ArtifactoryUtils {
 	 * 
 	 * @param resultsObject
 	 * @param functor
+	 * @throws JSONException 
 	 */
-	public static void forEachResults( JsonObject resultsObject, F2<Void,Integer,JsonObject> functor ) {
+	public static void forEachResults( JSONObject resultsObject, F2<Void,Integer,JSONObject> functor ) throws JSONException {
 		{
 		final String msg = "resultsObject is null!";
 		assert resultsObject != null : msg;
@@ -63,7 +68,7 @@ public class ArtifactoryUtils {
 			throw new IllegalArgumentException(msg);
 		}}
 		
-		forEachResults(resultsObject.getJsonArray("results"), functor);
+		forEachResults(resultsObject.getJSONArray("results"), functor);
 		
 		
 	}
@@ -88,13 +93,13 @@ public class ArtifactoryUtils {
 			throw new IllegalArgumentException(msg);
 		}}
 		
-        final Response response  = 
-        		client.target(uri)
-        		.request("application/vnd.org.jfrog.artifactory.search.ArtifactSearchResult+json")
-        		.build("DELETE").invoke();
+        final ClientResponse response  = 
+        		client.resource(uri)
+        		.accept("application/vnd.org.jfrog.artifactory.search.ArtifactSearchResult+json")
+        		.delete(ClientResponse.class);
         
         if (response.getStatus()>= 400) {
-            throw new WebApplicationExceptionMessage(response);
+            throw new WebApplicationExceptionMessage(Response.status(response.getStatus()).build());
         }
 		
 	}
