@@ -38,7 +38,7 @@ public class ArtifactoryUtils {
 		
 		
 		if( result != null ) {
-			for( int i=0; i<result.length(); ++i ) {
+			for( int i=1; i<=result.length(); ++i ) {
 				
 				final JSONObject o = result.getJSONObject(i);
 				

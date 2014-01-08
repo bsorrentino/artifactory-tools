@@ -255,7 +255,7 @@ public class ArtifactoryForgePlugin implements Plugin
 					if( p.has("lastDownloaded")) {
 						String lastDownload = p.getString("lastDownloaded");
 					
-						shell.println( String.format("[%d]\t\t%s - \t\tlastDownload: [%s]", i.intValue(), completeUri.relativize(uri), lastDownload) ); 
+						shell.println( String.format("[%d] lastDownload: [%s]\t%s - ", i.intValue(), lastDownload, completeUri.relativize(uri)) ); 
 					}
 					else {
 						shell.println( String.format("[%d]\t\t%s", i.intValue(), completeUri.relativize(uri) ) ); 
