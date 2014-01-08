@@ -1,13 +1,18 @@
 package org.bsc.forge;
 
 import java.net.URISyntaxException;
-import java.util.Arrays;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import org.bsc.ArtifactoryApi;
-import org.codehaus.jackson.JsonGenerator;
+import org.bsc.ArtifactoryUtils;
+import org.bsc.functional.F2;
+import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.jboss.forge.resources.Resource;
 import org.jboss.forge.resources.URLResource;
@@ -160,31 +165,114 @@ public class ArtifactoryForgePlugin implements Plugin
    @DefaultCommand
    public void defaultCommand(@PipeIn String in, PipeOut out)
    {
-	  if( !_context.isValid() ) {
-		  out.println( "context is not valid");
-	  }
-      out.println(String.valueOf(_context));
+		  if( !_context.isValid() ) {
+			  shell.println( ShellColor.RED, "context is not valid");
+		  }
+
+		  out.println(String.valueOf(_context));
    }
 
-   @Command
-   public void listRepositories(PipeOut out)
+   @Command("list-repositories")
+   public void listRepositories(PipeOut out) throws JSONException
    {
 		  if( !_context.isValid() ) {
-			  out.println( "context is not valid");
+			  shell.println( ShellColor.RED, "context is not valid");
 		  }
-		   String resultsObject = ArtifactoryApi.repositories(_context.client, _context.uri)
-  					.getAsVndOrgJfrogArtifactoryRepositoriesRepositoryDetailsListJson("LOCAL", String.class);
+		  
+		  JSONArray result = ArtifactoryApi.repositories(_context.client, _context.uri)
+  					.getAsVndOrgJfrogArtifactoryRepositoriesRepositoryDetailsListJson("LOCAL", JSONArray.class);
   
+		  ArtifactoryUtils.forEachResults(result, new F2<Void,Integer,JSONObject>() {
+
+			@Override
+			public Void f(Integer p1, JSONObject p2)  {
+				
+				try {
+					shell.println( ShellColor.BOLD,
+							String.format("[%d] %s %s", p1.intValue(), p2.getString("key"), p2.getString("type") ));
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+				
+				return null;
+			}
+			  
+		  });
 		  
    }
    
-   @Command
-   public void command(@PipeIn String in, PipeOut out, @Option String... args)
+   static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); 
+   static final SimpleDateFormat artifactoryDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX"); 
+   
+   @Command(value="list-dependencies")
+   public void listDependencies(@Option(required=true) final String repository, 
+		   						@Option(name="artifact", shortName="a") final String artifact, 
+		   						@Option(name="since", help="not download since, Date in format dd/mm/yyyy")  String date ) throws JSONException, ParseException
    {
-      if (args == null)
-         out.println("Executed named command without args.");
-      else
-         out.println("Executed named command with args: " + Arrays.asList(args));
+		  if( !_context.isValid() ) {
+			  shell.println( ShellColor.RED, "context is not valid");
+		  }
+	   JSONObject resultObject ;
+		if( date!=null ) {
+			
+			java.util.Date dt = dateFormat.parse(date);
+			
+			resultObject = ArtifactoryApi
+					.search(_context.client, _context.uri)
+					.usage()
+					.getAsVndOrgJfrogArtifactorySearchArtifactUsageResultJson(
+							dt.getTime(), 
+							repository, 
+							JSONObject.class)
+					;
+			
+		}
+		else {
+			resultObject = ArtifactoryApi
+					.search(_context.client, _context.uri)
+					.artifact()
+					.getAsVndOrgJfrogArtifactorySearchArtifactSearchResultJson(
+													artifact, 
+													repository, 
+													JSONObject.class);
+		
+		}
+
+		ArtifactoryUtils.forEachResults(resultObject, new F2<Void,Integer, JSONObject>() {
+
+			@Override
+			public Void f(Integer i, JSONObject p) {
+				
+				try {
+					java.net.URI uri = new java.net.URI( p.getString("uri") );
+
+					
+					java.net.URI completeUri = new java.net.URI( new StringBuilder()
+																	.append(_context.uri)
+																	.append("/storage/")
+																	.append(repository)
+																	.toString() );
+					if( p.has("lastDownloaded")) {
+						String lastDownload = p.getString("lastDownloaded");
+					
+						shell.println( String.format("[%d]\t\t%s - \t\tlastDownload: [%s]", i.intValue(), completeUri.relativize(uri), lastDownload) ); 
+					}
+					else {
+						shell.println( String.format("[%d]\t\t%s", i.intValue(), completeUri.relativize(uri) ) ); 
+					}
+				
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (URISyntaxException e) {
+					e.printStackTrace();
+				}
+				
+				return null;
+			}
+			
+		});
+		
    }
 
 }
