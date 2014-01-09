@@ -7,20 +7,18 @@
     <groupId>org.bsc</groupId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
-  <artifactId>artifactory-jersey-client</artifactId>
+  <artifactId>artifactory-jersey2-client</artifactId>
   <dependencies>
-<dependency>
-    <groupId>com.sun.jersey</groupId>
-    <artifactId>jersey-client</artifactId>
-    <version>1.18</version>
-</dependency>   
-
-<dependency>
-    <groupId>com.sun.jersey</groupId>
-    <artifactId>jersey-json</artifactId>
-    <version>1.18</version>
-</dependency>
- 
+    <dependency>
+      <groupId>org.glassfish.jersey.core</groupId>
+      <artifactId>jersey-client</artifactId>
+      <version>2.5</version>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish.jersey.media</groupId>
+      <artifactId>jersey-media-json-processing</artifactId>
+      <version>2.5</version>
+    </dependency>
     <dependency>
       <groupId>org.aspectj</groupId>
       <artifactId>aspectjrt</artifactId>
@@ -55,6 +53,7 @@
             </executions>
             <configuration>
               <packageName>org.bsc</packageName>
+              <generationStyle>jaxrs20</generationStyle>
             </configuration>
           </plugin>
         </plugins>

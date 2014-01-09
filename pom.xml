@@ -8,6 +8,7 @@
   <packaging>pom</packaging>
   <modules>
     <module>artifactory-jersey-client</module>
+    <module>artifactory-jersey2-client</module>
     <module>artifactory-groovy-client</module>
     <module>artifactory-forge</module>
   </modules>

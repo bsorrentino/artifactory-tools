@@ -3,7 +3,6 @@ package org.bsc.forge;
 import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -34,9 +33,9 @@ import com.sun.jersey.api.client.filter.ClientFilter;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 
 /**
- *
+ * Artifactory maintenance tasks
  */
-@Alias("artifactory")
+@Alias(value="artifactory")
 public class ArtifactoryForgePlugin implements Plugin
 {
    @Inject
@@ -110,9 +109,9 @@ public class ArtifactoryForgePlugin implements Plugin
     * @throws Exception
     */
    @SetupCommand
-   public void setup( @Option(required=true) Resource<?> endpoint, 
-		   				@Option(name="username", shortName="u") String username, 
-		   				@Option(name="password", shortName="p") String password ) throws Exception {
+   public void setup( @Option(required=true, help="artifactory url") Resource<?> endpoint, 
+		   				@Option(name="username", shortName="u", help="artifactory username (optional). By default, it will be requested interactively") String username, 
+		   				@Option(name="password", shortName="p", help="artifactory password (optional). By default, it will be requested interactively") String password ) throws Exception {
 	   
 	   if( !(endpoint instanceof URLResource) ) {
 		   throw new AbortedException( "endpoint is not a valid url!");
@@ -172,7 +171,7 @@ public class ArtifactoryForgePlugin implements Plugin
 		  out.println(String.valueOf(_context));
    }
 
-   @Command("list-repositories")
+   @Command(value="list-repositories", help="retrieve all available repositories")
    public void listRepositories(PipeOut out) throws JSONException
    {
 		  if( !_context.isValid() ) {
@@ -202,11 +201,11 @@ public class ArtifactoryForgePlugin implements Plugin
    }
    
    static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); 
-   static final SimpleDateFormat artifactoryDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX"); 
+   //static final SimpleDateFormat artifactoryDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX"); 
    
-   @Command(value="list-dependencies")
-   public void listDependencies(@Option(required=true) final String repository, 
-		   						@Option(name="artifact", shortName="a") final String artifact, 
+   @Command(value="list-artifacts",help="query by artifact")
+   public void listArtifacts(@Option(required=true, help="repository name" ) final String repository, 
+		   						@Option(name="artifact", shortName="a", help="artifact's name pattern") final String artifact, 
 		   						@Option(name="since", help="not download since, Date in format dd/mm/yyyy")  String date ) throws JSONException, ParseException
    {
 		  if( !_context.isValid() ) {
@@ -263,6 +262,97 @@ public class ArtifactoryForgePlugin implements Plugin
 				
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (URISyntaxException e) {
+					e.printStackTrace();
+				}
+				
+				return null;
+			}
+			
+		});
+		
+   }
+   
+   @Command(value="remove-artifacts",help="remove matching artifacts")
+   public void removeArtifacts(@Option(required=true) final String repository, 
+		   						@Option(name="artifact", shortName="a") final String artifact, 
+		   						@Option(name="since", help="not download since, Date in format dd/mm/yyyy")  String date, 
+		   						@Option(name="dryRun",flagOnly=true, defaultValue="false") final boolean dryRun ) throws JSONException, ParseException
+   {
+		  if( !_context.isValid() ) {
+			  shell.println( ShellColor.RED, "context is not valid");
+		  }
+	   JSONObject resultObject ;
+		if( date!=null ) {
+			
+			java.util.Date dt = dateFormat.parse(date);
+			
+			resultObject = ArtifactoryApi
+					.search(_context.client, _context.uri)
+					.usage()
+					.getAsVndOrgJfrogArtifactorySearchArtifactUsageResultJson(
+							dt.getTime(), 
+							repository, 
+							JSONObject.class)
+					;
+			
+		}
+		else {
+			resultObject = ArtifactoryApi
+					.search(_context.client, _context.uri)
+					.artifact()
+					.getAsVndOrgJfrogArtifactorySearchArtifactSearchResultJson(
+													artifact, 
+													repository, 
+													JSONObject.class);
+		
+		}
+
+		ArtifactoryUtils.forEachResults(resultObject, new F2<Void,Integer, JSONObject>() {
+
+			@Override
+			public Void f(Integer i, JSONObject p)  {
+				
+				try {
+
+					
+					java.net.URI completeUri = new java.net.URI( new StringBuilder()
+																	.append(_context.uri)
+																	.append("/storage/")
+																	.append(repository)
+																	.toString() );
+					final java.net.URI uri = new java.net.URI( p.getString("uri") );
+	
+					final java.net.URI relativeURI = completeUri.relativize(uri);
+				
+					if( p.has("lastDownloaded")) {
+						String lastDownload = p.getString("lastDownloaded");		
+						shell.print( String.format("[%04d] lastDownload: [%s]\t%s", i.intValue(), lastDownload, relativeURI) ); 
+						
+					}
+					else {
+						shell.print( String.format("[%04d]\t\t%s", i.intValue(), relativeURI ) ); 
+					}
+					
+					final String deleteUri = uri.toString().replace("/api/storage/", "/");
+					if( shell.isVerbose() ) {
+						shell.println/*Verbose*/(ShellColor.RED, String.format("\nPERFORMING DELETE ON URI \n[%s]", deleteUri) );
+					}
+					if( dryRun ) {
+						if( shell.isVerbose() ) {
+							shell.println/*Verbose*/(ShellColor.RED," DRY RUN SET - NOT DELETED!" );
+						}else {
+							shell.println();
+						}
+					}
+					else {
+						ArtifactoryUtils.deleteArtifactFromUri(_context.client, deleteUri);
+						shell.println( ShellColor.RED, " DELETED!!!");
+						
+					}
+				
+				} catch (JSONException e) {
 					e.printStackTrace();
 				} catch (URISyntaxException e) {
 					e.printStackTrace();
