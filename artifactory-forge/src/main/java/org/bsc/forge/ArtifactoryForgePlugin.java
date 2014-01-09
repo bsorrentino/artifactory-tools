@@ -275,7 +275,7 @@ public class ArtifactoryForgePlugin implements Plugin
    }
    
    @Command(value="remove-artifacts",help="remove matching artifacts")
-   public void removeArtifacts(@Option(required=true) final String repository, 
+   public void removeArtifacts(@Option(required=true, help="repository name") final String repository, 
 		   						@Option(name="artifact", shortName="a") final String artifact, 
 		   						@Option(name="since", help="not download since, Date in format dd/mm/yyyy")  String date, 
 		   						@Option(name="dryRun",flagOnly=true, defaultValue="false") final boolean dryRun ) throws JSONException, ParseException
@@ -362,6 +362,109 @@ public class ArtifactoryForgePlugin implements Plugin
 			}
 			
 		});
+		
+   }
+   
+   
+    transient boolean folderScanDryRun = false;
+    
+	final F2<Void, JSONObject, JSONObject> folderScan = new F2<Void, JSONObject, JSONObject>() {
+		
+		@Override
+		public Void f(final JSONObject parent, JSONObject folder) {
+			
+			String path = "";
+			try {
+				
+				boolean isFolder = folder.getBoolean("folder");
+				
+				if( !isFolder ) {
+					return null;
+				}
+				
+				path =  new StringBuilder()
+							.append(parent.getString("repo"))
+							.append(parent.getString("path"))
+							.toString();
+				
+				final String subPath = path.concat(folder.getString("uri"));
+				
+				final JSONObject subFolder = ArtifactoryApi
+						.storage(_context.client, _context.uri)
+						.path( subPath )
+						.getAsVndOrgJfrogArtifactoryStorageFolderInfoJson(JSONObject.class);
+
+				final JSONArray children = subFolder.getJSONArray("children");
+
+				if( children.length() == 0 ) {
+					shell.print( ShellColor.RED, String.format("empty folder [%s]",subPath));
+					
+					final String deleteUri = parent.getString("uri")
+												.replace("/api/storage/", "/")
+												.concat(folder.getString("uri"));
+					
+					if( shell.isVerbose() ) {
+						shell.print/*Verbose*/(ShellColor.RED, String.format("\nPERFORMING DELETE ON URI [%s]", deleteUri) );
+					}
+
+					if( !folderScanDryRun ) {
+						
+						ArtifactoryUtils.deleteArtifactFromUri(_context.client, deleteUri);
+						shell.println( ShellColor.RED, " DELETED!!!");					
+					}
+					else {
+						if( shell.isVerbose() ) {
+							shell.println/*Verbose*/(ShellColor.RED," DRY RUN SET - NOT DELETED!" );
+						}	
+						else {
+							shell.println();
+						}
+						
+					}
+					return null;
+					
+				}		
+				ArtifactoryUtils.forEachResults( children, subFolder, folderScan );
+				
+			} catch (JSONException e) {
+				shell.println( String.format("error scan folder [%s]", path));
+			}
+		
+			
+			return null;
+		}
+		
+	};
+   
+	/**
+	 * 
+	 * @param repository
+	 * @param dryRun
+	 * @throws JSONException
+	 * @throws ParseException
+	 */
+   @Command(value="purge-empty-folders",help="remove empty folders")
+   public void removeEmptyFolders(	@Option(required=true, help="repository name") final String repository, 
+		   							@Option(name="dryRun",flagOnly=true, defaultValue="false") final boolean dryRun ) throws JSONException, ParseException
+   {
+		if (!_context.isValid()) {
+			shell.println(ShellColor.RED, "context is not valid");
+		}
+	
+		folderScanDryRun = dryRun;
+		
+		final JSONObject resultObject = ArtifactoryApi
+					.storage(_context.client, _context.uri)
+					.path( repository )
+					.getAsVndOrgJfrogArtifactoryStorageFolderInfoJson(JSONObject.class);
+
+		JSONArray children = resultObject.getJSONArray("children");
+		
+		if( children.length() == 0 ) {
+			shell.println( ShellColor.RED, String.format("empty folder [%s]",resultObject.getString("path")));
+		}
+		
+		ArtifactoryUtils.forEachResults(resultObject.getJSONArray("children"), resultObject, folderScan ); 
 		
    }
 

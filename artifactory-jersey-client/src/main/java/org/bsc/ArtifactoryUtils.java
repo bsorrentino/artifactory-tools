@@ -15,6 +15,38 @@ public class ArtifactoryUtils {
 
 	protected ArtifactoryUtils() {
 	}
+	
+	/**
+	 * 
+	 * @param resultsObject
+	 * @param functor
+	 * @throws JSONException 
+	 */
+	public static <T>  void forEachResults( JSONArray result, T param,  F2<Void,T,JSONObject> functor ) throws JSONException {
+		{
+		final String msg = "resultsObject is null!";
+		assert result != null : msg;
+		if( result == null ) {
+			throw new IllegalArgumentException(msg);
+		}}
+		{
+		final String msg = "functor is null!";
+		assert functor != null : msg;
+		if( functor == null ) {
+			throw new IllegalArgumentException(msg);
+		}}
+		
+		
+		if( result != null ) {
+			for( int i=0; i<result.length(); ++i ) {
+				
+				final JSONObject o = result.getJSONObject(i);
+				
+				functor.f( param, o );
+			}
+		}
+		
+	}
 
 	/**
 	 * 
