@@ -278,91 +278,105 @@ public class ArtifactoryForgePlugin implements Plugin
    public void removeArtifacts(@Option(required=true, help="repository name") final String repository, 
 		   						@Option(name="artifact", shortName="a") final String artifact, 
 		   						@Option(name="since", help="not download since, Date in format dd/mm/yyyy")  String date, 
-		   						@Option(name="dryRun",flagOnly=true, defaultValue="false") final boolean dryRun ) throws JSONException, ParseException
+		   						@Option(name="dryRun",flagOnly=true, defaultValue="false") final boolean dryRun, 
+		   						@Option(name="confirm",flagOnly=true, defaultValue="false",help="ask confirmation for each artifact") final boolean confirm 
+		   						) throws JSONException, ParseException
    {
-		  if( !_context.isValid() ) {
-			  shell.println( ShellColor.RED, "context is not valid");
-		  }
-	   JSONObject resultObject ;
-		if( date!=null ) {
-			
+		if (!_context.isValid()) {
+			shell.println(ShellColor.RED, "context is not valid");
+		}
+		JSONObject resultObject;
+		if (date != null) {
+
 			java.util.Date dt = dateFormat.parse(date);
-			
+
 			resultObject = ArtifactoryApi
 					.search(_context.client, _context.uri)
 					.usage()
 					.getAsVndOrgJfrogArtifactorySearchArtifactUsageResultJson(
-							dt.getTime(), 
-							repository, 
-							JSONObject.class)
-					;
-			
-		}
-		else {
+							dt.getTime(), repository, JSONObject.class);
+
+		} else {
 			resultObject = ArtifactoryApi
 					.search(_context.client, _context.uri)
 					.artifact()
 					.getAsVndOrgJfrogArtifactorySearchArtifactSearchResultJson(
-													artifact, 
-													repository, 
-													JSONObject.class);
-		
+							artifact, repository, JSONObject.class);
+
 		}
 
-		ArtifactoryUtils.forEachResults(resultObject, new F2<Void,Integer, JSONObject>() {
+		ArtifactoryUtils.forEachResults(resultObject,
+				new F2<Void, Integer, JSONObject>() {
 
-			@Override
-			public Void f(Integer i, JSONObject p)  {
-				
-				try {
+					@Override
+					public Void f(Integer i, JSONObject p) {
 
-					
-					java.net.URI completeUri = new java.net.URI( new StringBuilder()
-																	.append(_context.uri)
-																	.append("/storage/")
-																	.append(repository)
-																	.toString() );
-					final java.net.URI uri = new java.net.URI( p.getString("uri") );
-	
-					final java.net.URI relativeURI = completeUri.relativize(uri);
-				
-					if( p.has("lastDownloaded")) {
-						String lastDownload = p.getString("lastDownloaded");		
-						shell.print( String.format("[%04d] lastDownload: [%s]\t%s", i.intValue(), lastDownload, relativeURI) ); 
-						
-					}
-					else {
-						shell.print( String.format("[%04d]\t\t%s", i.intValue(), relativeURI ) ); 
-					}
-					
-					final String deleteUri = uri.toString().replace("/api/storage/", "/");
-					if( shell.isVerbose() ) {
-						shell.println/*Verbose*/(ShellColor.RED, String.format("\nPERFORMING DELETE ON URI \n[%s]", deleteUri) );
-					}
-					if( dryRun ) {
-						if( shell.isVerbose() ) {
-							shell.println/*Verbose*/(ShellColor.RED," DRY RUN SET - NOT DELETED!" );
-						}else {
-							shell.println();
+						try {
+
+							java.net.URI completeUri = new java.net.URI(
+									new StringBuilder().append(_context.uri)
+											.append("/storage/")
+											.append(repository).toString());
+							final java.net.URI uri = new java.net.URI(p
+									.getString("uri"));
+
+							final java.net.URI relativeURI = completeUri
+									.relativize(uri);
+
+							if (p.has("lastDownloaded")) {
+								String lastDownload = p
+										.getString("lastDownloaded");
+								shell.print(String.format(
+										"[%04d] lastDownload: [%s]\t%s",
+										i.intValue(), lastDownload, relativeURI));
+
+							} else {
+								shell.print(String.format("[%04d]\t\t%s",
+										i.intValue(), relativeURI));
+							}
+
+							final String deleteUri = uri.toString().replace(
+									"/api/storage/", "/");
+							if (shell.isVerbose()) {
+								shell.println/* Verbose */(
+										ShellColor.RED,
+										String.format(
+												"\nPERFORMING DELETE ON URI \n[%s]",
+												deleteUri));
+							}
+							if (dryRun) {
+								if (shell.isVerbose()) {
+									shell.println/* Verbose */(ShellColor.RED,
+											" DRY RUN SET - NOT DELETED!");
+								} else {
+									shell.println();
+								}
+							} else {
+								boolean delete = true;
+								
+								if( confirm ) {
+									delete = shell.promptBoolean("confirm deletion?", false);
+								}
+								
+								if( delete ) {
+									ArtifactoryUtils.deleteArtifactFromUri(
+											_context.client, deleteUri);
+									shell.println(ShellColor.RED, " DELETED!!!");
+								}
+
+							}
+
+						} catch (JSONException e) {
+							e.printStackTrace();
+						} catch (URISyntaxException e) {
+							e.printStackTrace();
 						}
+
+						return null;
 					}
-					else {
-						ArtifactoryUtils.deleteArtifactFromUri(_context.client, deleteUri);
-						shell.println( ShellColor.RED, " DELETED!!!");
-						
-					}
-				
-				} catch (JSONException e) {
-					e.printStackTrace();
-				} catch (URISyntaxException e) {
-					e.printStackTrace();
-				}
-				
-				return null;
-			}
-			
-		});
-		
+
+				});
+
    }
    
    
