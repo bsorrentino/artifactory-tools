@@ -24,7 +24,7 @@ public class ArtifactoryForgePluginTest extends AbstractShellTest
    {
   
       //getShell().execute("artfactory setup  http://artifactory.au-sdc.com:8080/artifactory builder builder2013.01");
-      getShell().execute("artifactory setup http://support.softphone.it/artifactory --username bsorrentino --password BactiuSP");
+      getShell().execute("artifactory setup http://support.softphone.it/artifactory --username bsorrentino --password *****");
       getShell().execute("artifactory");
       
       final String sb = new StringBuilder()
